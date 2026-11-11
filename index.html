@@ -359,6 +359,27 @@ body.phone.portrait .device.mopen .sx>*{margin:0}
 .dl button,.card button.done{font:700 14px var(--ui);border:none;border-radius:10px;padding:9px 14px;cursor:pointer}
 .dl button{background:#e3ecf6;color:var(--navy)}
 .dl button.stop{background:#f6e2df;color:#8a2a1c}
+
+/* ===== user guide: shown on first launch, reopened from Settings ▸ مساعدة ===== */
+.gd{position:fixed;inset:0;z-index:60;background:#f6f3ea;display:flex;flex-direction:column;direction:rtl;font-family:var(--ui);color:#1c2433;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.gdh{display:flex;justify-content:space-between;align-items:center;padding:10px 16px 4px;font:600 14px var(--num);color:#6b7280;max-width:620px;width:100%;margin:0 auto}
+.gdh button{font:700 15px var(--ui);color:var(--blue-d);background:none;border:none;padding:6px 4px;cursor:pointer}
+.gdb{flex:1;min-height:0;overflow-y:auto;padding:4px 18px 8px;display:flex;flex-direction:column;gap:10px;max-width:620px;width:100%;margin:0 auto}
+.gdi{display:flex;justify-content:center;background:#fff;border:1px solid #e4dfd0;border-radius:18px;padding:10px;flex:none}
+.gdi img{display:block;max-width:100%;max-height:42vh;border-radius:10px;box-shadow:0 1px 6px rgba(0,0,0,.12)}
+.gd h2{margin:6px 0 0;font:800 23px/1.5 var(--ui);color:var(--navy)}
+.gdx{font-size:16px;line-height:1.95}
+.gdx p{margin:0 0 6px}.gdx ul{margin:0;padding-inline-start:22px;display:grid;gap:4px}
+.gdx b{color:var(--navy)}
+.gdd{display:flex;justify-content:center;gap:6px;padding:8px 0}
+.gdd i{width:8px;height:8px;border-radius:50%;background:#d6d0bf;display:block;transition:width .2s}
+.gdd i.on{width:22px;border-radius:99px;background:var(--blue)}
+.gdf{display:flex;gap:10px;padding:4px 16px 14px;max-width:620px;width:100%;margin:0 auto}
+.gdf button{flex:1;font:700 17px var(--ui);border:none;border-radius:12px;padding:13px 10px;cursor:pointer;background:var(--blue);color:#fff}
+.gdf button.alt{background:#e3ecf6;color:var(--navy)}
+body.portrait.phone .gdi img,body.portrait .gdi img{max-height:34vh}
+@media (orientation:landscape) and (max-height:520px){.gdb{flex-direction:row;flex-wrap:wrap;align-content:flex-start}.gdi{width:46%}.gdi img{max-height:58vh}.gdb>h2,.gdb>.gdx{width:calc(54% - 12px)}}
 .bar{height:8px;border-radius:4px;background:#e3e7ee;overflow:hidden;margin-top:10px}
 .bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
 .dlT{font-size:13px;color:#55607a;margin-top:6px;font-variant-numeric:tabular-nums}
@@ -405,6 +426,12 @@ body.phone.portrait .device.mopen .sx>*{margin:0}
 </div>
 <div class="rotate">أدر الجهاز إلى الوضع الأفقي لأفضل عرض</div>
 
+<div id="gd" class="gd" hidden role="dialog" aria-label="دليل الاستخدام">
+  <div class="gdh"><span id="gdN"></span><button id="gdSkip">تخطَّ الدليل</button></div>
+  <div class="gdb" id="gdB"><div class="gdi"><img id="gdImg" alt=""></div><h2 id="gdT"></h2><div class="gdx" id="gdX"></div></div>
+  <div class="gdd" id="gdD"></div>
+  <div class="gdf"><button class="alt" id="gdPrev">السابق</button><button id="gdNext">التالي</button></div>
+</div>
 <div class="sheet" id="sheet" hidden>
   <div class="card setcard" role="dialog" aria-labelledby="sheetTitle">
     <div class="sethead">
@@ -516,6 +543,7 @@ body.phone.portrait .device.mopen .sx>*{margin:0}
       <section class="pane" data-pane="help">
         <div class="grp">
           <h3>طريقة الاستخدام</h3>
+          <button class="done listenbtn" id="gdOpen">📖 دليل الاستخدام: كيف أستعمل التطبيق؟</button>
           <ul class="helplist">
             <li>اضغط على أي سورة لتشغيلها.</li>
             <li>مفتاح التكرار: بدون ← تكرار الآية ← تكرار السورة.</li>
@@ -1599,6 +1627,36 @@ $("dlStop").onclick=()=>{try{if(NA())AndroidBridge.audioCancel()}catch(e){}dl.jo
 
 /* back button in the Android app: return 1 when handled, 0 lets the app close */
 window.handleBack=()=>{if(HZ.open&&$("sheet").hidden&&$("dls").hidden&&$("aud").hidden&&$("pick").hidden){closeHifz();return 1}if(!$("aud").hidden){closeAud();return 1}if(!$("pick").hidden){$("pick").hidden=true;return 1}if(!$("dls").hidden){$("dls").hidden=true;return 1}if(!$("sheet").hidden){closeSheet();return 1}return 0};
+
+/* ===== user guide ===== */
+const GUIDE=[
+ ["board","لوحة السور",`<ul><li><b>اضغط أي سورة</b> فتبدأ تلاوتها من أولها.</li><li>الشاشة الخضراء في الأعلى تعرض <b>القارئ</b> و<b>السورة والآية</b>، و<b>السرعة</b>، و<b>السكوت بعد الآية</b> إن كان مفعّلًا.</li><li>زر <b>الإعدادات</b> ⚙ وزر <b>التنزيل</b> ⬇ أعلى الجهاز.</li></ul>`],
+ ["ctrl","مفاتيح التحكم",`<ul><li><b>الآية التالية</b> و<b>الآية السابقة</b>.</li><li><b>تشغيل / إيقاف</b>: إيقاف مؤقت ثم إكمال من الموضع نفسه، و<b>إيقاف</b> ينهي التلاوة.</li><li><b>رفع الصوت</b> و<b>خفض الصوت</b>.</li><li><b>تكرار</b>: كل ضغطة تنقل بين: بدون تكرار ← تكرار الآية ← تكرار السورة.</li><li>تُظهر أو تُخفي المفاتيح من تبويب <b>المفاتيح</b> في الإعدادات.</li></ul>`],
+ ["readers","القراء 1 و2 و3",`<ul><li>ثلاثة قراء تختارهم أنت، و<b>الضغط على المفتاح</b> ينقل التلاوة إلى صوته.</li><li><b>اضغط مطوّلًا</b> على مفتاح القارئ لتفتح الإعدادات وتختار القراء.</li><li>زر <b>«استمع للقراء واختر»</b> يُسمعك كل قارئ قبل اختياره.</li></ul>`],
+ ["hifz","تكرار الآيات للحفظ",`<ul><li>فعّل مفتاح <b>«تكرار الآيات»</b> من تبويب <b>تكرار الآيات والمصحف</b>.</li><li>اختر سورة ثم اضغط <b>تكرار الآيات</b>، فتُقسَّم السورة إلى مقاطع تظهر في الهامش.</li><li>كل مقطع <b>يتكرر بلا توقف</b> حتى تنتقل إلى غيره، واختر عدد آيات المقطع من 1 إلى 5.</li></ul>`],
+ ["mushaf","المصحف مع التلاوة",`<ul><li>فعّل مفتاح <b>«المصحف»</b> مكان «أدعية مختارة»، واضغطه لفتح المصحف.</li><li>تُظلَّل <b>الآية المقروءة</b> وتتقلّب الصفحات مع القارئ.</li><li><b>اضغط أي آية</b> لتبدأ التلاوة منها، و<b>اسحب</b> لتقليب الصفحات.</li><li>زر <b>وجه / وجهان</b> لعرض صفحة أو صفحتين.</li></ul>`],
+ ["eds","مصحفان من مجمع الملك فهد",`<ul><li><b>طبعة 1421</b> (الصورة الأولى) و<b>طبعة 1405</b> (الصورة الثانية): حروفها أعرض وأثقل وأرقام آياتها أوضح.</li><li><b>اضغط مطوّلًا</b> على مفتاح «المصحف» للتبديل بينهما، أو اختر من الإعدادات.</li><li>المصحف <b>يملأ الشاشة</b>، ويمكن إرجاعه إلى شكل الصفحة المطبوعة من الإعدادات.</li></ul>`],
+ ["rec","سرعة التلاوة والسكوت بعد الآية",`<ul><li>من تبويب <b>التلاوة</b>: اجعل التلاوة <b>أبطأ أو أسرع</b>، واستمع إلى معاينة قبل الاعتماد.</li><li><b>السكوت بعد كل آية</b>: ربع مدة الآية أو نصفها أو ثلاثة أرباعها أو مثلها، لتردّد الآية بعد القارئ.</li><li>ويمكن أن يُقرأ <b>اسم السورة</b> قبل تلاوتها.</li></ul>`],
+ ["dl","الاستماع والقراءة بدون إنترنت",`<ul><li>من زر <b>التنزيل</b> ⬇ اختر القارئ والسور ثم اضغط <b>تنزيل</b>.</li><li>ومن الأعلى نزّل <b>المصحف كاملًا</b> بأيّ الطبعتين.</li><li>ما نزّلته يعمل <b>بدون إنترنت</b>.</li></ul>`],
+ ["set","الإعدادات والمساعدة",`<ul><li>تبويبات الإعدادات: <b>التلاوة</b> و<b>المفاتيح</b> و<b>تكرار الآيات والمصحف</b> و<b>الشكل والشاشة</b> و<b>مساعدة</b>.</li><li>إن اختفى مفتاح تحتاجه: <b>المفاتيح</b> ← <b>إظهار كل المفاتيح المخفية</b>.</li><li>هذا الدليل تجده متى احتجته في تبويب <b>مساعدة</b>.</li></ul>`]];
+let gdI=0;
+function gdShow(i){gdI=Math.max(0,Math.min(GUIDE.length-1,i));const[img,t,x]=GUIDE[gdI],I=$("gdImg");
+  I.src="help/"+img+".webp";I.alt=t;$("gdT").textContent=t;$("gdX").innerHTML=x;
+  $("gdN").textContent=(gdI+1)+" من "+GUIDE.length;
+  $("gdD").innerHTML=GUIDE.map((_,k)=>`<i class="${k===gdI?"on":""}"></i>`).join("");
+  $("gdPrev").style.visibility=gdI?"visible":"hidden";$("gdNext").textContent=gdI===GUIDE.length-1?"ابدأ الاستخدام":"التالي";$("gdB").scrollTop=0}
+function openGuide(){if(!$("sheet").hidden)closeSheet();gdShow(0);$("gd").hidden=false}
+function closeGuide(){$("gd").hidden=true;store.set("guideSeen",true)}
+$("gdNext").onclick=()=>{if(gdI===GUIDE.length-1)return closeGuide();gdShow(gdI+1)};
+$("gdPrev").onclick=()=>gdShow(gdI-1);
+$("gdSkip").onclick=closeGuide;
+$("gdOpen").onclick=openGuide;
+{let sx=0,sy=0;const G=$("gd");
+  G.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  G.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)gdShow(gdI+(dx>0?1:-1))},{passive:true})}
+{const hb=window.handleBack;window.handleBack=()=>{if(!$("gd").hidden){closeGuide();return 1}return hb?hb():0}}
+if(!store.get("guideSeen",false))setTimeout(openGuide,500);
 
 /* ===== input ===== */
 let lpTimer,lpFired=false;
