@@ -475,7 +475,7 @@ body.phone.portrait .device.mopen .sx>*{margin:0}
       <section class="pane" data-pane="hz">
         <div class="grp">
           <h3>تكرار الآيات</h3>
-          <label class="tog" for="hifzOn"><input type="checkbox" id="hifzOn"> إظهار مفتاح «تكرار الآيات» مع مفاتيح التحكم</label>
+          <label class="tog" for="hifzOn"><input type="checkbox" id="hifzOn"> إظهار مفتاح «تكرار الآيات»</label>
           <label class="tog" for="hzBoard"><input type="checkbox" id="hzBoard"> إظهار مفاتيح العدد 1 إلى 5 بجانب «أدعية مختارة» (الوضع الطولي)</label>
           <label class="tog" for="hzKeys"><input type="checkbox" id="hzKeys"> إظهار مفاتيح العدد والمقاطع في الهامش عند التكرار</label>
           <label class="tog" for="hzLock"><input type="checkbox" id="hzLock"> بعد اختيار عدد الآيات تُقفل بقية الأعداد حتى إيقاف التلاوة</label>
@@ -1505,9 +1505,9 @@ $("scrollOn").addEventListener("change",e=>{SCROLLKEYS=e.target.checked;store.se
 $("mfullOn").addEventListener("change",e=>{setLook("mfull",e.target.checked);if(M.open&&M.data)showSpread(M.spread)});
 $("medSel").addEventListener("change",e=>setEdition(+e.target.value===1?1:2));
 $("mushafOn").addEventListener("change",e=>{M.btnOn=e.target.checked;store.set("mushafOn",M.btnOn);if(!M.btnOn&&M.open)openMushaf(false);syncMushafBtn()});
-$("hifzOn").addEventListener("change",e=>{HZ.on=e.target.checked;store.set("hifzOn",HZ.on);if(!HZ.on){if(S.hifz)breakHifz(true);closeHifz()}rebuildCtrl();setOrientation(PORTRAIT,PHONE);syncHifzBtn()});
+$("hifzOn").addEventListener("change",e=>{HZ.on=e.target.checked;store.set("hifzOn",HZ.on);if(!HZ.on){if(S.hifz)breakHifz(true);closeHifz()}setOrientation(PORTRAIT,PHONE);fitUnit();syncHifzBtn()});
 $("hifzSize").addEventListener("change",e=>{HZ.size=+e.target.value;store.set("hifzSize",HZ.size);if(HZ.open)drawRailHifz()});
-$("hzBoard").addEventListener("change",e=>{store.set("hzBoard",e.target.checked);setOrientation(PORTRAIT,PHONE)});
+$("hzBoard").addEventListener("change",e=>{store.set("hzBoard",e.target.checked);setOrientation(PORTRAIT,PHONE);fitUnit()});
 $("hzKeys").addEventListener("change",e=>{HZ.keysOn=e.target.checked;store.set("hzKeys",HZ.keysOn);if(!HZ.keysOn&&HZ.open)closeHifz();else if(HZ.keysOn&&S.hifz&&!HZ.open)openHifz()});
 $("hzLock").addEventListener("change",e=>{HZ.lockOn=e.target.checked;store.set("hzLock",HZ.lockOn);if(!HZ.lockOn)HZ.lock=0;if(HZ.open)drawRailHifz()});
 $("hzVoice").addEventListener("change",e=>{HZ.voice=e.target.checked;store.set("hzVoice",HZ.voice)});
