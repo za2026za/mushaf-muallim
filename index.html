@@ -126,6 +126,18 @@ body.app .stage{display:block}
 .mlines .ln span{display:block;border-radius:.12em;cursor:pointer;transition:background .15s,color .15s}
 .mlines .ln span.pl{color:var(--plb)}
 .mlines .ln span.lp{background:rgba(26,124,196,.2)}
+.mlines .ln span.sel{background:rgba(242,182,50,.32)}
+.mlines .ln span.sela{background:rgba(242,182,50,.62);border-radius:4px}
+.selbar{position:fixed;top:0;left:0;right:0;z-index:16;direction:rtl;font-family:var(--ui);background:#fffaf0;border-bottom:3px solid #f2b632;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);padding:calc(env(safe-area-inset-top,0px) + 6px) 8px 6px;display:flex;flex-direction:column;gap:6px}
+.selbar[hidden]{display:none}
+.selh{display:flex;align-items:center;gap:6px}.selh b{flex:1;min-width:0;color:var(--navy);font-size:14px;line-height:1.25}
+.selbar button{font-family:var(--ui);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.selh button,.self button.go{border:none;border-radius:10px;padding:7px 11px;font-weight:800;font-size:13px;background:#e6eaf2;color:var(--navy);white-space:nowrap}
+.self{display:flex;gap:6px;align-items:stretch}.self .rgreps{flex:1;min-width:0;gap:4px;flex-wrap:nowrap}.self button.go{flex:none;background:#1f9a5a;color:#fff;font-size:14px;padding:0 12px}.self button.go:disabled{opacity:.45}
+.selbar .rgreps button{flex:1 1 0;min-width:0;padding:0;min-height:34px;border-radius:9px;border:2px solid #c3cbd8;background:#fff;color:var(--navy);font:800 13px/1 var(--num);direction:ltr}
+.selbar .rgreps button.on{border-color:#c78f00;background:#fff8e1;box-shadow:0 0 0 3px #ffe08a}
+.nv button[data-nv="ayat"].on{box-shadow:0 0 0 3px #f2b632,0 4px 10px rgba(10,30,70,.28)}
 .spread{-webkit-touch-callout:none}
 .mlines .hd{flex:1;display:flex;align-items:center;justify-content:center}
 .mlines .hd .box{width:100%;height:78%;border:calc(var(--fb)*.8) solid var(--frame);outline:calc(var(--fb)*.4) solid var(--gold);outline-offset:calc(var(--fb)*-2.6);border-radius:999px/50%;display:flex;align-items:center;justify-content:center;background:var(--tint)}
@@ -269,7 +281,7 @@ body.phone.portrait .home{bottom:calc(var(--u)*1.3)}
 body.phone.portrait .mushaf{bottom:calc(var(--u)*7)}
 body.phone.portrait .device.mopen .mushaf{bottom:calc(var(--u)*14)}
 body.phone.portrait .device.mopen .rail{height:calc(var(--u)*12.6)}
-body.phone.portrait .device.mopen .sx{display:grid;grid-template-columns:repeat(5,1fr);grid-gap:calc(var(--u)*.8);gap:calc(var(--u)*.8)}
+body.phone.portrait .device.mopen .sx{display:grid;grid-template-columns:repeat(6,1fr);grid-gap:calc(var(--u)*.8);gap:calc(var(--u)*.8)}
 body.phone.portrait .device.mopen .sx>*{margin:0}
 .nogap body.portrait .rail>*+*,.nogap body.portrait .sx>*+*{margin-top:0;margin-right:calc(var(--u)*.9)}
 .panel{flex:1;direction:rtl;display:grid;grid-template-columns:repeat(13,1fr);grid-template-rows:repeat(10,1fr);grid-gap:calc(var(--u)*.75) calc(var(--u)*.8);gap:calc(var(--u)*.75) calc(var(--u)*.8);padding:calc(var(--u)*1.2);
@@ -303,6 +315,22 @@ body.phone.portrait .device.mopen .sx>*{margin:0}
 .btn.cap svg{width:calc(var(--b)*.48);height:calc(var(--b)*.48)}
 .btn small{font:700 calc(var(--b)*.27)/1.1 var(--name);position:relative;white-space:nowrap}
 .btn.txt{font:700 calc(var(--b)*.46)/1 var(--name)}
+.btn[data-f="cnt"]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--b)*.03)}
+/* key colours (1.87) */
+.kcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px;margin:8px 0}
+.card .kcgrid button{padding:8px 6px;border-radius:10px;border:1px solid #c9d1de;background:#e9eef6;color:#1d2633;font:700 13px var(--ui);cursor:pointer;min-width:0}
+/* surah colours (1.83) */
+.scpal{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.card .scpal button{min-width:58px;padding:7px 10px;border-radius:10px;border:2px solid #c3cbd8;font:800 13px var(--ui);cursor:pointer;color:#1d2633}
+.card .scpal button.on{border-color:#1d2633;box-shadow:0 0 0 3px #ffe08a}
+.scgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:5px;max-height:300px;overflow-y:auto;margin:8px 0;padding:2px;border:1px solid #e1e5ec;border-radius:12px;background:#fafbfd}
+.card .scgrid button{display:flex;align-items:center;gap:5px;padding:6px 7px;border-radius:9px;border:1px solid #d5dbe5;background:#fff;color:#1d2633;font:700 13px var(--ui);cursor:pointer;text-align:right;min-width:0}
+.card .scgrid button i{font:800 11px var(--num);font-style:normal;opacity:.7;flex:none}
+.card .scgrid button span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scbtns{display:flex;gap:8px;flex-wrap:wrap}.scbtns .done{flex:1}
+.btn .cn{font:800 calc(var(--b)*.42)/1 var(--num)}
+.sb .cn{font:800 calc(var(--u)*2.3)/1 var(--num)}
+.btn .cn,.sb .cn{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
 .tog{display:flex;gap:10px;align-items:center;font-size:15px;font-weight:700;margin:4px 0 6px;cursor:pointer}
 .tog input{width:20px;height:20px}
 .speed{display:grid;grid-template-columns:auto auto auto 1fr;grid-gap:10px;gap:10px;align-items:center;direction:rtl}
@@ -430,7 +458,7 @@ body.portrait.phone .gdi img,body.portrait .gdi img{max-height:34vh}
 .grp .stopc select{flex:0 1 auto;font-size:14.5px;background:#f6f8fb}
 .slot select{background:#f6f8fb}
 .grp>button.done{margin:8px 0 4px}
-@media(min-width:600px){.tabs{grid-template-columns:repeat(7,1fr)}}
+@media(min-width:600px){.tabs{grid-template-columns:repeat(8,1fr)}}
 @media(max-width:560px){#sheet{padding:0}#sheet .card.setcard{max-width:none;width:100%;height:100%;max-height:100%;border-radius:0}}
 /* ===== Tajawal (1.57): room for the taller, wider letters ===== */
 .lcd .main{line-height:2}
@@ -456,10 +484,160 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
 .card button.rgf.on{border-color:#c78f00;background:#fff8e1;box-shadow:0 0 0 3px #ffe08a}
 .pickgrid button.rin{background:#e3ecf6;border-color:#9fb6d4}
 .pickgrid button.ra,.pickgrid button.rb{background:var(--navy);color:#fff;border-color:var(--navy)}
-.pickgrid{max-height:calc(100dvh - 330px)}
+.pickgrid{max-height:calc(100dvh - 420px);min-height:110px}
 .rgfoot{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pickhead select{flex:1;min-width:0;max-width:200px;font:700 15px var(--ui);padding:6px 8px;border-radius:10px;border:2px solid #c3cbd8;background:#fff;color:var(--navy)}
+.rgrep{display:flex;align-items:center;gap:4px 8px;flex-wrap:wrap;margin-top:8px}
+.rgrep>span{font-weight:800;color:var(--navy);font-size:14px;flex:1 0 100%}
+.rgreps{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.card .rgreps button{flex:1 1 0;min-width:0;padding:0;min-height:36px;border-radius:10px;border:2px solid #c3cbd8;background:#fff;color:var(--navy);font:800 16px/1 var(--num);cursor:pointer;direction:ltr}
+@media (orientation:landscape) and (max-height:560px){
+  #pick{padding:6px}
+  #pick .pickcard{max-height:calc(100dvh - 12px);overflow-y:auto;padding-top:10px;padding-bottom:10px}
+  #pick .pickhead h2{font-size:17px}
+  #pick .rgsel{margin:4px 0 2px}#pick .card button.rgf,#pick button.rgf{padding:3px 6px;flex-direction:row;justify-content:center;gap:8px}
+  #pick #pickHint{margin:2px 0;font-size:13px}
+  #pick .pickgrid{max-height:max(70px,calc(100dvh - 330px));min-height:0}
+  #pick .rgrep{margin-top:4px}#pick .rgrep>span{flex:0 0 auto}
+  #pick .rgfoot{flex-wrap:nowrap;margin-top:8px}#pick .rgfoot #rgGo{flex:2 1 0;padding:8px;font-size:15px}#pick .rgfoot .ghost{padding:8px 4px}
+}
+.card .rgreps button.on{border-color:#c78f00;background:#fff8e1;box-shadow:0 0 0 3px #ffe08a}
 .rgfoot #rgGo{flex:1 1 100%;font-size:17px;padding:12px}
 .rgfoot .ghost{flex:1}
+/* ===== modern floating control keys (1.61, default; «لامع» brings back the glossy look) =====
+   only the control keys: the surah keys and the green ayah keys keep their look */
+body.bmod .ctrl .btn{--c:#1f6fd6;--cs:31,111,214;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),var(--c)!important;border:none!important;border-radius:calc(var(--b)*.3);
+  box-shadow:0 calc(var(--u)*.7) calc(var(--u)*1.5) rgba(10,30,70,.38),0 calc(var(--u)*.2) calc(var(--u)*.35) rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.25)!important;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s}
+body.bmod .ctrl .btn::before{display:none}
+body.bmod .ctrl .btn:active,body.bmod .ctrl .btn.press{transform:translateY(calc(var(--u)*.15)) scale(.96);filter:brightness(.93);
+  box-shadow:0 calc(var(--u)*.15) calc(var(--u)*.35) rgba(10,30,70,.35),0 1px 2px rgba(0,0,0,.2)!important}
+body.bmod .ctrl .btn.lit{box-shadow:0 0 0 calc(var(--u)*.3) #ffcf3d,0 calc(var(--u)*.7) calc(var(--u)*1.6) rgba(255,180,20,.55),0 calc(var(--u)*.2) calc(var(--u)*.35) rgba(0,0,0,.22)!important}
+body.bmod.redplay #f_play{--c:#e2392c;--cs:226,57,44}
+body.bmod.stop-black #f_stop{--c:#2a2e36;--cs:20,22,28}
+body.bmod.stop-red #f_stop{--c:#e2392c;--cs:226,57,44}
+body.bmod.hz-green #f_hifz{--c:#1f9a5a;--cs:31,154,90}
+body.bmod.hz-gold #f_hifz{--c:#cf9a22;--cs:207,154,34}
+body.bmod.hz-purple #f_hifz{--c:#7a4fc4;--cs:122,79,196}
+body.bmod.hz-orange #f_hifz{--c:#ec7722;--cs:236,119,34}
+body.bmod.hz-red #f_hifz{--c:#e2392c;--cs:226,57,44}
+body.bmod .ctrl .btn.off{filter:saturate(.35);opacity:.45}
+/* modern floating look also for «المصحف» and the verse-count keys 1–5 (1.62) */
+body.bmod .key.mus,body.bmod .key.hzc{--c:#1f9a5a;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),var(--c)!important;border:none!important;
+  box-shadow:0 calc(var(--u)*.6) calc(var(--u)*1.3) rgba(10,40,25,.36),0 calc(var(--u)*.18) calc(var(--u)*.3) rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.25)!important;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s}
+body.bmod .key.mus{border-radius:calc(var(--u)*1.6)}
+body.bmod .key.mus:active,body.bmod .key.mus.press,body.bmod .key.hzc:active,body.bmod .key.hzc.press{transform:translateY(calc(var(--u)*.12)) scale(.95);filter:brightness(.93);
+  box-shadow:0 calc(var(--u)*.15) calc(var(--u)*.3) rgba(10,40,25,.35),0 1px 2px rgba(0,0,0,.2)!important}
+body.bmod .key.hzc.on{--c:#f2b632;box-shadow:0 0 0 calc(var(--u)*.28) #fff3c4,0 calc(var(--u)*.6) calc(var(--u)*1.4) rgba(200,140,10,.55),0 calc(var(--u)*.18) calc(var(--u)*.3) rgba(0,0,0,.2)!important}
+body.bmod .key.hzc.off{opacity:.35;filter:saturate(.3)}
+
+/* ===== the new view (1.63) ===== */
+.nv{position:fixed;top:0;right:0;bottom:0;left:0;z-index:10;display:flex;flex-direction:column;background:#efe7d2;direction:rtl;font-family:var(--ui);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body.vnew .stage,body.vnew .rotate{display:none!important}
+.nvtop{flex:none;display:flex;align-items:center;gap:10px;padding:6px 12px;background:#fbf7ec;border-bottom:1px solid #ddd2b6;min-height:34px}
+.nvinfo{flex:1;min-width:0;display:flex;gap:10px;align-items:baseline;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:14px;color:#3a3427}
+.nvinfo b{color:var(--navy);font-weight:800}
+.nvinfo .nvtag{color:#9a6a00;font-weight:700}
+.nvpg{flex:none;font:700 13px var(--num);color:#6c6555}
+.nvm{flex:1;min-height:0;position:relative}
+body.vnew #mushaf{position:absolute;top:0;right:0;bottom:0;left:0;border-radius:0;box-shadow:none}
+.nvplay{flex:none;display:flex;justify-content:center;gap:8px;padding:5px 12px 0;background:#fbf7ec;border-top:1px solid #ddd2b6}
+.nvbar{flex:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;padding:6px 6px 8px;background:#fbf7ec}
+.nvplay[hidden]+.nvbar{border-top:1px solid #ddd2b6}
+.nv button{all:unset;box-sizing:border-box;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border-radius:14px;min-height:46px;padding:4px 2px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),#1f6fd6;
+  box-shadow:0 4px 10px rgba(10,30,70,.28),0 1px 3px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .12s,box-shadow .12s,filter .12s;user-select:none;-webkit-user-select:none}
+.nv button:active{transform:translateY(2px) scale(.96);filter:brightness(.93);box-shadow:0 1px 3px rgba(10,30,70,.3)}
+.nv button svg{width:19px;height:19px;fill:#fff;flex:none}
+.nv button small{font:700 10px/1.15 var(--ui);white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:block}
+.nvbar button{min-width:0}
+.nv button b.fit,.nv button small.fit{transform:scale(var(--fs,1));transform-origin:50% 50%;max-width:none;overflow:visible;text-overflow:clip}
+.nv button.nvmain{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),#1f9a5a}
+.nv button.lit{box-shadow:0 0 0 3px #ffcf3d,0 4px 12px rgba(255,180,20,.5)}
+.nv button.nvr b{font:800 18px/1 var(--num);white-space:nowrap}
+.nv button.nvr.w b{font:800 13px/1.1 var(--name)}
+.nv button.nvr small{font-size:9px;opacity:.9}
+body.redplay .nvplay button[data-nv="pause"]{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),#e2392c}
+.nvplay button{min-width:76px;min-height:34px;flex-direction:row;gap:5px;padding:3px 12px;border-radius:18px}
+.nvplay button small{font-size:12px}
+.nvplay button svg{width:17px;height:17px}
+.nvplay button[data-nv="stop"]{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0) 55%),#2a2e36}
+.nvplay button.dim{opacity:.5}
+.segoff{opacity:.35!important;filter:grayscale(.8)}.segoff.lit{box-shadow:none!important}
+.sb,.nv button{position:relative}
+.rpb{position:absolute;top:2px;left:3px;font:800 10px/1 var(--num);font-style:normal;direction:ltr;unicode-bidi:isolate;background:#f2b632;color:#1d2633;border-radius:6px;padding:2px 4px;pointer-events:none}
+.rpb:empty{display:none}
+.gpv{display:block;font:800 10.5px/1 var(--num);font-style:normal;color:#fff;background:#0f9b8e;border-radius:5px;padding:2px 4px;margin-top:1px;pointer-events:none}
+.gpv:empty{display:none}.sb .gpv{font-size:calc(var(--u)*1.2)}
+#tip{position:fixed;z-index:40;max-width:min(330px,88vw);background:#1d2633;color:#fff;font:600 14px/1.55 var(--ui);direction:rtl;text-align:right;
+  padding:9px 13px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.35);pointer-events:none}
+#tip[hidden]{display:none}#tip b{color:#ffd76a}
+body.nvnolab .nvbar button small,body.nvnolab .nvplay button small{display:none}
+body.nvnolab .nvbar button{min-height:40px}
+body.nvbig .nvbar button{min-height:58px;border-radius:16px}
+body.nvbig .nv button svg{width:24px;height:24px}
+body.nvbig .nv button small{font-size:12px}
+body.nvbig .nvplay button{min-height:42px}
+body.nvbig .nv button.nvr b{font-size:23px}
+body.nvbig .nv button.nvr.w b{font-size:16px}
+@media (orientation:landscape) and (max-height:520px){
+  .nvbar{padding:4px 8px 5px;gap:5px}.nv button{min-height:38px;border-radius:12px;padding:2px}.nv button svg{width:17px;height:17px}
+  .nvplay{padding:4px 12px 0}.nvplay button{min-height:32px}.nvtop{min-height:28px;padding:3px 12px}}
+@media (min-width:700px){.nvbar{max-width:900px;margin:0 auto;width:100%}}
+/* surah list */
+.nvlist{position:fixed;top:0;right:0;bottom:0;left:0;z-index:15;background:#f6f3ea;display:flex;flex-direction:column;direction:rtl;font-family:var(--ui);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.nvlh{flex:none;display:flex;gap:8px;align-items:center;padding:10px 12px;background:var(--navy);color:#fff}
+.nvlh b{font-size:17px;white-space:nowrap}
+.nvlh input{flex:1;min-width:0;font:600 15px var(--ui);padding:9px 12px;border-radius:12px;border:none;outline:none;user-select:text;-webkit-user-select:text}
+.nvlh button{all:unset;cursor:pointer;background:#fff;color:var(--navy);font:800 14px var(--ui);padding:9px 14px;border-radius:12px}
+.nvlg{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;padding:12px;align-content:start}
+.nvlg button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;
+  background:#fff;border-radius:14px;padding:9px 12px;box-shadow:0 2px 6px rgba(20,30,60,.1);touch-action:manipulation}
+.nvlg button[hidden]{display:none}
+.nvlg button b{grid-row:1/3;min-width:34px;height:34px;border-radius:50%;background:#e8eefb;color:var(--navy);display:grid;place-items:center;font:800 14px var(--num)}
+.nvlg button span{font:800 16px/1.3 var(--name);color:#1c2433}
+.nvlg button small{font:600 12px var(--ui);color:#6b7280}
+.nvlg button.cur{box-shadow:0 0 0 2.5px #ffb400,0 2px 6px rgba(20,30,60,.1)}
+.nvlg button:active{transform:scale(.97)}
+
+/* ===== new view, compact keys (1.67): one row, about the size of the margin keys ===== */
+.nvbar,.nvplay{padding:5px 6px 7px;gap:5px;border-top:1px solid #ddd2b6}
+.nvbar[hidden],.nvplay[hidden]{display:none}
+.nvplay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:stretch}
+.nv button{min-height:36px;border-radius:9px;padding:2px;gap:2px}
+.nv button svg{width:18px;height:18px}
+.nv button.nvr b{font-size:16px}
+.nv button.nvr.w b{font-size:12px}
+.nv button.nvr small{display:none}
+.nvplay button{min-height:36px;min-width:0;border-radius:9px;flex-direction:row;gap:6px;padding:2px 8px}
+.nvplay button svg{width:18px;height:18px}
+.nvplay button small{font-size:12px}
+body:not(.nvnolab) .nvbar button{min-height:42px}
+body:not(.nvnolab) .nvbar button small{font-size:9.5px}
+body.nvnolab .nvbar button{min-height:36px}
+body.nvnolab .nvbar button small{display:none}
+body.nvnolab .nvplay button small{display:inline}
+body.nvbig .nvbar button,body.nvbig .nvplay button{min-height:46px;border-radius:11px}
+body.nvbig .nv button svg{width:22px;height:22px}
+body.nvbig .nv button.nvr b{font-size:20px}
+body.nvbig .nv button.nvr.w b{font-size:14px}
+@media (orientation:landscape) and (max-height:520px){.nvbar,.nvplay{padding:4px 8px 5px}.nv button,.nvplay button,body.nvnolab .nvbar button{min-height:32px}.nv button svg,.nvplay button svg{width:16px;height:16px}body:not(.nvnolab) .nvbar button{min-height:36px}}
+
+/* sound row with the reader keys (1.68): stop, repeat, pause/resume, readers 1 2 3 */
+.nvplay{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.nv button[hidden]{display:none!important}
+.nv button.nvcnt b{font:800 16px/1 var(--num);direction:ltr;unicode-bidi:isolate}
+body.nvbig .nv button.nvcnt b{font-size:20px}
+.nvplay button{flex-direction:column;gap:2px;padding:2px}
+.nvplay button small{font-size:9.5px}
+body.nvnolab .nvplay button small{display:none}
+body:not(.nvnolab) .nvplay button{min-height:42px}
+/* the version number stays in the top bar (1.70) */
+#lcdPg{opacity:.65;font-size:calc(var(--u)*1.15)}
+.nvpg{opacity:.75;font-size:12px}
 </style>
 </head>
 <body>
@@ -499,6 +677,37 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
 </div>
 <div class="rotate">أدر الجهاز إلى الوضع الأفقي لأفضل عرض</div>
 
+<!-- ===== the new view: the mushaf on the whole screen with a bar of keys below it ===== -->
+<div class="nv" id="nv" hidden>
+  <div class="nvtop" id="nvTop"><div class="nvinfo" id="nvInfo" aria-live="polite"></div><span class="nvpg" id="nvPg"></span></div>
+  <div class="nvm" id="nvM"></div>
+  <div class="nvplay" id="nvPlay" hidden>
+    <button data-nv="stop" aria-label="إيقاف"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></svg><small>إيقاف</small></button>
+    <button data-nv="rep" id="nvRep" aria-label="تكرار"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4V8H8a3 3 0 0 0-3 3v1H3v-1a5 5 0 0 1 5-5h9zM7 21l-4-4 4-4v3h9a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5H7z"/></svg><small>تكرار</small><i class="rpb"></i></button>
+    <button data-nv="cnt" id="nvCnt" class="nvcnt" aria-label="عدد التكرار"><b>×1</b><small>العدد</small></button>
+    <button data-nv="gap" id="nvGap" aria-label="السكوت بعد كل آية"><svg viewBox="0 0 24 24"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"/></svg><em class="gpv"></em><small>سكوت</small></button>
+    <button data-nv="ayat" aria-label="اختيار آيات لتكرارها"><svg viewBox="0 0 24 24"><path d="M4 4h7v2H6v12h5v2H4zM13 4h7v16h-7v-2h5V6h-5zM9 11h6v2H9z"/></svg><small>آيات</small></button>
+    <button data-nv="pause" id="nvPause" aria-label="إيقاف مؤقت"><svg viewBox="0 0 24 24"></svg><small>مؤقت</small></button>
+    <button data-nv="r0" class="nvr" aria-label="القارئ 1"><b>1</b><small></small></button>
+    <button data-nv="r1" class="nvr" aria-label="القارئ 2"><b>2</b><small></small></button>
+    <button data-nv="r2" class="nvr" aria-label="القارئ 3"><b>3</b><small></small></button>
+  </div>
+  <nav class="nvbar" id="nvBar">
+    <button data-nv="list" aria-label="قائمة السور"><svg viewBox="0 0 24 24"><path d="M4 5h2v2H4zM8 5h12v2H8zM4 11h2v2H4zM8 11h12v2H8zM4 17h2v2H4zM8 17h12v2H8z"/></svg><small>السور</small></button>
+    <button data-nv="listen" id="nvListen" class="nvmain" aria-label="استماع"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></svg><small>استماع</small></button>
+    <button data-nv="r0" id="nvR0" class="nvr" aria-label="القارئ 1"><b>1</b><small></small></button>
+    <button data-nv="r1" id="nvR1" class="nvr" aria-label="القارئ 2"><b>2</b><small></small></button>
+    <button data-nv="r2" id="nvR2" class="nvr" aria-label="القارئ 3"><b>3</b><small></small></button>
+    <button data-nv="ayat" aria-label="اختيار آيات لتكرارها"><svg viewBox="0 0 24 24"><path d="M4 4h7v2H6v12h5v2H4zM13 4h7v16h-7v-2h5V6h-5zM9 11h6v2H9z"/></svg><small>آيات</small></button>
+    <button data-nv="dl" aria-label="التنزيل"><svg viewBox="0 0 24 24"><path d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16 6.3 10.3l1.4-1.4L11 12.2zM5 18h14v2H5z"/></svg><small>تنزيل</small></button>
+    <button data-nv="set" aria-label="الإعدادات"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.6 7.6 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.6 7.6 0 0 0 1.7 1L11 21h4l.4-2.9a7.6 7.6 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg><small>إعدادات</small></button>
+  </nav>
+</div>
+<div class="nvlist" id="nvList" hidden role="dialog" aria-label="قائمة السور">
+  <div class="nvlh"><b>قائمة السور</b><input type="search" id="nvFind" placeholder="ابحث باسم السورة أو رقمها" autocomplete="off"><button id="nvLx">إغلاق</button></div>
+  <div class="nvlg" id="nvLg"></div>
+</div>
+
 <div id="gd" class="gd" hidden role="dialog" aria-label="دليل الاستخدام">
   <div class="gdh"><span id="gdN"></span><button id="gdSkip">تخطَّ الدليل</button></div>
   <div class="gdb" id="gdB"><div class="gdi"><img id="gdImg" alt=""></div><h2 id="gdT"></h2><div class="gdx" id="gdX"></div></div>
@@ -512,6 +721,7 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
       <button class="done" id="done">تم</button>
     </div>
     <div class="tabs" role="tablist" id="setTabs">
+      <button role="tab" data-tab="view"><i>🖥</i>العرض</button>
       <button role="tab" data-tab="rec"><i>🎙</i>التلاوة</button>
       <button role="tab" data-tab="rpt"><i>🔁</i>التكرار</button>
       <button role="tab" data-tab="msh"><i>📖</i>المصحف</button>
@@ -521,6 +731,31 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
       <button role="tab" data-tab="help"><i>❓</i>مساعدة</button>
     </div>
     <div class="setbody">
+
+      <section class="pane" data-pane="view">
+        <div class="grp">
+          <h3>طريقة العرض</h3>
+          <div class="stopc"><label for="viewSel">العرض</label><select id="viewSel"><option value="old">العرض القديم — لوحة السور والمفاتيح</option><option value="new">العرض الجديد — المصحف مع شريط أزرار</option></select></div>
+          <p>في <b>العرض الجديد</b> يملأ المصحف الشاشة، وتحته أزرار: السور، والاستماع، والقراء 1 و2 و3، والتنزيل، والإعدادات. وللرجوع إلى العرض القديم اختره من هنا.</p>
+        </div>
+        <div class="grp">
+          <h3>إعدادات العرض الجديد</h3>
+          <div class="stopc"><label for="nvPagesSel">عدد الصفحات</label><select id="nvPagesSel"><option value="auto">تلقائي (صفحة طولياً وصفحتان عرضياً)</option><option value="1">صفحة واحدة دائماً</option><option value="2">صفحتان دائماً</option></select></div>
+          <label class="tog" for="nvStatusOn"><input type="checkbox" id="nvStatusOn"> شريط المعلومات أعلى المصحف (القارئ والسورة والآية)</label>
+          <label class="tog" for="nvLabelsOn"><input type="checkbox" id="nvLabelsOn"> أسماء الأزرار تحت الرموز</label>
+          <label class="tog" for="nvBigOn"><input type="checkbox" id="nvBigOn"> أزرار أكبر</label>
+          <label class="tog" for="nvSurahPlayOn"><input type="checkbox" id="nvSurahPlayOn"> عند اختيار سورة من القائمة تبدأ تلاوتها مباشرة</label>
+          <p class="sub">عند الإلغاء: تنتقل إلى صفحة السورة، واضغط «استماع» لتبدأ.</p>
+        </div>
+        <div class="grp">
+          <h3>إعدادات العرض القديم</h3>
+          <label class="tog" for="mushafOn"><input type="checkbox" id="mushafOn"> مفتاح «المصحف» مكان «أدعية مختارة» في لوحة السور</label>
+          <label class="tog" for="scrollOn"><input type="checkbox" id="scrollOn"> مربعات سور كبيرة مع التمرير (للجوال)</label>
+          <p class="sub">عند الإلغاء تظهر السور كلها في شاشة واحدة. يدور التطبيق مع الجهاز حسب إعداد التدوير التلقائي.</p>
+          <p class="sub">مفاتيح التحكم و«تكرار الآيات» ومفاتيح 1 إلى 5 من تبويبي «المفاتيح» و«التكرار».</p>
+        </div>
+        <p class="sub">إعدادات المصحف (الطبعة، لمس الآيات، التنزيل) في تبويب «المصحف» وتعمل في العرضين.</p>
+      </section>
 
       <section class="pane" data-pane="rec">
         <div class="grp">
@@ -577,21 +812,41 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
           <label class="tog" for="hzVoice"><input type="checkbox" id="hzVoice"> نطق العدد المختار (مثل: «تكرار ثلاث آيات عدة مرات»)</label>
         </div>
         <div class="grp">
-          <h3>إيقاف التكرار</h3>
-          <label class="tog" for="hzBreak"><input type="checkbox" id="hzBreak"> الضغط على «تكرار» أثناء تكرار المقطع يوقف التكرار أيضاً</label>
+          <h3>مفتاحا «تكرار» و«العدد»</h3>
+          <div class="stopc"><label for="repModeSel">طريقة مفتاح «تكرار»</label><select id="repModeSel"><option value="cycle">كل ضغطة تغيّر العدد: بلا توقف ← ×2 ← ×3 … ← بدون</option><option value="toggle">الطريقة السابقة: ضغطة تشغّل تكرار الآية أو توقفه</option></select></div>
+          <p class="sub">الضغط المطوّل على «تكرار» في الطريقتين: تكرار السورة.</p>
+          <p>«العدد»: ×1 ← ×2 … حتى أعلى عدد ← ×1.</p>
+          <div class="stopc"><label for="nvCntMaxSel">أعلى عدد للمفتاحين</label><select id="nvCntMaxSel"></select></div>
+          <label class="tog" for="repInSeg"><input type="checkbox" id="repInSeg"> تكرار الآية يعمل داخل المقطع أيضاً (الآيات المحددة و«تكرار الآيات») — في العرضين</label>
+          <p class="sub">عند تعطيله يصير «تكرار» و«العدد» باهتين أثناء تكرار المقطع حتى ينتهي أو تضغط «إيقاف».</p>
+          <label class="tog" for="hzBreak" hidden><input type="checkbox" id="hzBreak"> (لم يعد مستعملاً)</label>
+        </div>
+        <div class="grp">
+          <h3>التلميحات</h3>
+          <label class="tog" for="tipsOn"><input type="checkbox" id="tipsOn"> الضغط المطوّل على أي زر يُظهر وظيفته لثوانٍ</label>
+          <div class="stopc"><label for="tipDelaySel">مدة الضغط لإظهار التلميح</label><select id="tipDelaySel"><option value="500">نصف ثانية</option><option value="700">0.7 ثانية</option><option value="1000">ثانية</option><option value="1500">ثانية ونصف</option></select></div>
+          <p class="sub">الوظيفة الثانية للمفتاح (تكرار السورة، اختيار القارئ، تبديل الطبعة) بعد التلميح بنصف ثانية.</p>
+        </div>
+        <div class="grp">
+          <h3>الرجوع للوضع القديم</h3>
+          <p>يعيد «تكرار» إلى الطريقة السابقة، ويجعل «تكرار» و«العدد» باهتين أثناء تكرار المقطع، ويوقف التلميحات.</p>
+          <button class="done ghost" id="repOld" type="button">↩ الرجوع للوضع القديم</button>
         </div>
       </section>
 
       <section class="pane" data-pane="msh">
         <div class="grp">
-          <h3>مفتاح المصحف</h3>
-          <label class="tog" for="mushafOn"><input type="checkbox" id="mushafOn"> مفتاح «المصحف» مكان «أدعية مختارة» في لوحة السور</label>
-        </div>
-        <div class="grp">
           <h3>عرض المصحف</h3>
           <label class="tog" for="mfullOn"><input type="checkbox" id="mfullOn"> المصحف ملء الشاشة (تمتد الصفحة لتملأ المساحة كلها)</label>
-          <div class="stopc"><label for="medSel">نوع المصحف</label><select id="medSel"><option value="2">مصحف المدينة — طبعة 1421</option><option value="1">مصحف المدينة — طبعة 1405 (خط أعرض وأوضح)</option></select></div>
-          <p class="sub">كلاهما من مجمع الملك فهد لطباعة المصحف الشريف، 604 صفحات. طبعة 1405 حروفها أعرض وأثقل فتُقرأ بسهولة أكبر، وقد تختلف بداية بعض الصفحات قليلاً.<br>للتبديل السريع بين المصحفين: اضغط مطولاً على مفتاح «المصحف».</p>
+          <div class="stopc"><label for="medSel">نوع المصحف</label><select id="medSel"><option value="2">مصحف المدينة — طبعة 1423</option><option value="4">طبعة 1423 بألوان التجويد (V4)</option><option value="1">مصحف المدينة — طبعة 1405 (خط أعرض وأوضح)</option></select></div>
+          <p class="sub">كلها من مجمع الملك فهد لطباعة المصحف الشريف، 604 صفحات. <b>V4</b> هي طبعة 1423 نفسها بألوان أحكام التجويد. طبعة 1405 حروفها أعرض وأثقل فتُقرأ بسهولة أكبر، وقد تختلف بداية بعض الصفحات قليلاً.<br>للتبديل السريع بين المصاحف: اضغط مطولاً على مفتاح «المصحف».</p>
+        </div>
+        <div class="grp">
+          <h3>تقليب الصفحات</h3>
+          <div class="stopc"><label for="ptSel">طريقة تقليب الصفحات</label><select id="ptSel"><option value="slide">تقليب جانبي — الصفحة تتحرك مع الإصبع</option><option value="none">فوري — بلا تأثير</option></select></div>
+          <p>في التقليب الجانبي تتحرك الصفحة مع إصبعك وتظهر التالية بجانبها؛ إذا سحبت أكثر من خُمس العرض أو سحبت بسرعة تنقلب، وإلا ترجع مكانها.</p>
+          <div class="stopc" id="ptSpeedRow"><label for="ptSpeed">سرعة الحركة</label><select id="ptSpeed"><option value="f">سريعة</option><option value="n">عادية</option><option value="s">هادئة</option></select></div>
+          <label class="tog" for="ptAuto" id="ptAutoRow"><input type="checkbox" id="ptAuto"> الحركة نفسها عند تقليب الصفحة مع التلاوة وبالأزرار</label>
         </div>
         <div class="grp">
           <h3>لمس الآيات</h3>
@@ -608,8 +863,11 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
         <div class="grp">
           <h3>مفاتيح لوحة التحكم</h3>
           <p>المفاتيح غير المفعّلة تُخفى، وتتسع المفاتيح الباقية مكانها.</p>
+          <div class="stopc"><label for="ctrlOrderSel">ترتيب مفاتيح التحكم</label><select id="ctrlOrderSel"><option value="job">حسب الوظيفة: تلاوة · تكرار · صوت وقراء</option><option value="old">الترتيب السابق</option></select></div>
           <label class="tog" for="stopOn"><input type="checkbox" id="stopOn"> مفتاح «إيقاف» (يوقف التلاوة فقط)</label>
           <label class="tog" for="surahNavOn"><input type="checkbox" id="surahNavOn"> مفتاحا «السورة التالية» و«السورة السابقة»</label>
+          <label class="tog" for="cntOn"><input type="checkbox" id="cntOn"> مفتاح «عدد التكرار» ×١…×٥ (في اللوحة وبجانب المصحف)</label>
+          <label class="tog" for="gapOn"><input type="checkbox" id="gapOn"> مفتاح «سكوت» (في العرضين: اللوحة، وبجانب المصحف، وأزرار الصوت)</label>
           <label class="tog" for="rangeOn"><input type="checkbox" id="rangeOn"> مفتاح «من آية إلى آية»</label>
           <p class="sub">يفتح نافذة واحدة: اختر آية البداية ثم آية النهاية، ثم «ابدأ التلاوة».</p>
           <button class="done ghost wide" id="showAllBtns">إظهار كل المفاتيح المخفية</button>
@@ -622,6 +880,8 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
           <h3>اللمس</h3>
           <label class="tog" for="fastOn"><input type="checkbox" id="fastOn"> استجابة سريعة: يعمل المفتاح بمجرد لمسه</label>
           <p class="sub">عند الإلغاء يعمل المفتاح بعد رفع الإصبع عنه.</p>
+          <label class="tog" for="touchEasy"><input type="checkbox" id="touchEasy"> لمس سهل — للشاشة التي عليها لاصق حماية، أو إذا احتاج المفتاح ضغطًا قويًا</label>
+          <p class="sub">يعمل المفتاح بلمسة خفيفة في العرضين، ولو تحرّك الإصبع قليلًا. مفاتيح الضغط المطوّل (تكرار، القراء، المصحف) ومفاتيح السور في القائمة التي تتمرّر تعمل عند رفع الإصبع. التلميح يحتاج ضغطًا أطول (ثانية وخُمس).</p>
         </div>
       </section>
 
@@ -634,20 +894,34 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
         </div>
         <div class="grp">
           <h3>الألوان</h3>
+          <div class="stopc"><label for="bstyleSel">شكل مفاتيح التحكم</label><select id="bstyleSel"><option value="mod">حديث عائم</option><option value="gloss">لامع (الشكل السابق)</option></select></div>
           <label class="tog" for="redOn"><input type="checkbox" id="redOn"> مفتاح التشغيل والإيقاف باللون الأحمر</label>
           <div class="stopc"><label for="stopColor">لون مفتاح «إيقاف»</label><select id="stopColor"><option value="black">أسود</option><option value="red">أحمر</option><option value="blue">أزرق مثل باقي المفاتيح</option></select></div>
-          <label class="tog" for="tintOn"><input type="checkbox" id="tintOn"> تلوين سور جزء عمّ وسورة البقرة بلون أخضر خفيف</label>
+          <input type="checkbox" id="tintOn" hidden>
           <button class="done ghost wide" id="lookReset">إرجاع الشكل الأصلي</button>
+        </div>
+        <div class="grp" id="scGrp">
+          <h3>ألوان السور</h3>
+          <label class="tog" for="scOld"><input type="checkbox" id="scOld"> إظهار الألوان في العرض القديم (مفاتيح السور)</label>
+          <label class="tog" for="scNew"><input type="checkbox" id="scNew"> إظهار الألوان في قائمة السور (العرض الجديد)</label>
+          <p class="sub">١) اختر اللون. ٢) اضغط السور التي تريدها في القائمة، والضغط مرة ثانية يزيل اللون. أو لوّن كل السور أو جزء عمّ دفعة واحدة.</p>
+          <div class="scpal" id="scPal"></div>
+          <div class="scbtns"><button class="done ghost" id="scAll" type="button">تلوين كل السور بهذا اللون</button><button class="done ghost" id="scAmma" type="button">تلوين جزء عمّ بهذا اللون</button></div>
+          <div class="scgrid" id="scGrid"></div>
+          <div class="scbtns"><button class="done ghost" id="scDef" type="button">الافتراضي: البقرة وجزء عمّ</button><button class="done ghost" id="scClear" type="button">إزالة كل الألوان</button></div>
+        </div>
+        <div class="grp" id="kcGrp">
+          <h3>ألوان المفاتيح</h3>
+          <label class="tog" for="kcOn"><input type="checkbox" id="kcOn"> إظهار ألوان المفاتيح (في العرضين)</label>
+          <p class="sub">١) اختر اللون. ٢) اضغط المفاتيح التي تريد تلوينها، والضغط مرة ثانية يرجعها للونها الأصلي. اللون يظهر على المفتاح نفسه في اللوحة وبجانب المصحف وفي العرض الجديد.</p>
+          <div class="scpal" id="kcPal"></div>
+          <div class="kcgrid" id="kcGrid"></div>
+          <div class="scbtns"><button class="done ghost" id="kcSug" type="button">ألوان مقترحة للتمييز</button><button class="done ghost" id="kcAll" type="button">تلوين كل المفاتيح</button><button class="done ghost" id="kcClear" type="button">إرجاع الألوان الأصلية</button></div>
         </div>
         <div class="grp">
           <h3>الشاشة</h3>
           <label class="tog" for="fillOn" id="fillRow" hidden><input type="checkbox" id="fillOn"> تكبير البرنامج ليملأ نافذة المتصفح كلها</label>
           <label class="tog" for="fullOn"><input type="checkbox" id="fullOn"> <span id="fullLbl">ملء الشاشة (إخفاء شريط الحالة ومفاتيح النظام)</span></label>
-        </div>
-        <div class="grp">
-          <h3>لوحة السور</h3>
-          <label class="tog" for="scrollOn"><input type="checkbox" id="scrollOn"> مربعات سور كبيرة مع التمرير (للجوال)</label>
-          <p class="sub">عند الإلغاء تظهر السور كلها في شاشة واحدة. يدور التطبيق مع الجهاز حسب إعداد التدوير التلقائي.</p>
         </div>
       </section>
 
@@ -690,6 +964,8 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
             <li>الضغط المطوّل على مفتاح القارئ 1 أو 2 أو 3 يفتح الإعدادات.</li>
             <li>المفتاح الدائري على يمين الجهاز ومفتاح «إيقاف» يوقفان التلاوة.</li>
             <li>مفتاح التنزيل أعلى الجهاز لتنزيل التلاوات وصفحات المصحف والاستماع بدون إنترنت.</li>
+            <li>طريقة العرض: من تبويب «العرض» اختر العرض القديم (لوحة السور) أو الجديد (المصحف مع شريط أزرار في الأسفل).</li>
+            <li>مفتاح «تكرار»: ضغطة تشغّل تكرار الآية وضغطة توقفه، والضغط المطوّل يكرر السورة كلها.</li>
             <li>إن اختفى مفتاح تحتاجه: تبويب «المفاتيح» ← «إظهار كل المفاتيح المخفية».</li>
             <li>لحفظ إعداداتك أو نقلها لجوال آخر: تبويب «النسخ الاحتياطي».</li>
           </ul>
@@ -709,7 +985,7 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
     <div class="pickhead"><h2 id="dlsTitle">التنزيل</h2><button class="done" id="dlsX">إغلاق</button></div>
     <p id="dlsNote">اختر القارئ والسور، ثم اضغط «تنزيل». السور المنزّلة تعمل بدون إنترنت.</p>
     <div class="mdl">
-      <div class="mdlrow"><b>تنزيل المصحف</b><select id="mdlEd" aria-label="اختر المصحف"><option value="2">طبعة 1421</option><option value="1">طبعة 1405 (أوضح)</option></select><span id="mdlCount"></span>
+      <div class="mdlrow"><b>تنزيل المصحف</b><select id="mdlEd" aria-label="اختر المصحف"><option value="2">طبعة 1423</option><option value="4">طبعة 1423 بالتجويد (V4)</option><option value="1">طبعة 1405 (أوضح)</option></select><span id="mdlCount"></span>
         <button class="done" id="mdlGo">تنزيل المصحف كاملاً</button><button class="done stop" id="mdlStop" hidden>إيقاف</button></div>
       <div id="mdlProg" hidden><div class="bar"><i id="mdlBar"></i></div><div class="dlT" id="mdlT"></div></div>
     </div>
@@ -747,9 +1023,14 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
   </div>
 </div>
 
+<div id="tip" hidden role="tooltip"></div>
+<div class="selbar" id="selBar" hidden role="dialog" aria-label="تحديد آيات من المصحف">
+  <div class="selh"><b id="selMsg">اضغط آية البداية</b><button id="selNum">بالأرقام</button><button id="selX">إلغاء</button></div>
+  <div class="self"><div class="rgreps" id="selReps"></div><button id="selGo" class="go" disabled>🔁 كرّر</button></div>
+</div>
 <div class="sheet" id="pick" hidden>
   <div class="card pickcard" role="dialog" aria-labelledby="pickTitle">
-    <div class="pickhead"><h2 id="pickTitle">اختر الآية</h2><button class="done" id="pickX">إغلاق</button></div>
+    <div class="pickhead"><h2 id="pickTitle">اختر الآية</h2><select id="pickS" aria-label="السورة"></select><button class="done" id="pickX">إغلاق</button></div>
     <div class="rgsel">
       <button class="rgf" id="rgFrom" data-w="a"><small>البداية</small><b id="rgFromV">1</b></button>
       <span class="rgarrow">←</span>
@@ -757,9 +1038,11 @@ html[data-font="amiri"]{--ui:"MF Amiri","MM Cairo","MM Naskh","Noto Naskh Arabic
     </div>
     <p id="pickHint"></p>
     <div class="pickgrid" id="pickGrid"></div>
+    <div class="rgrep"><span>تكرار الآيات المختارة</span><div class="rgreps" id="rgReps"></div></div>
     <div class="rgfoot">
       <button class="done ghost" id="rgEnd">حتى نهاية السورة</button>
       <button class="done ghost" id="rgOne">آية واحدة</button>
+      <button class="done ghost" id="rgMus">📖 من المصحف</button>
       <button class="done" id="rgGo">▶ ابدأ التلاوة</button>
     </div>
   </div>
@@ -820,7 +1103,8 @@ const OLD_IDS={Alafasy_128kbps:"alafasy",Abdul_Basit_Murattal_192kbps:"abdulbasi
   Ali_Jaber_64kbps:"alijaber",Nasser_Alqatami_128kbps:"qatami",Fares_Abbad_64kbps:"abbad"};
 const AR_DIGITS="٠١٢٣٤٥٦٧٨٩",arNum=n=>String(n).replace(/\d/g,d=>AR_DIGITS[d]);
 const RECITERS=RECITER_GROUPS.flatMap(([name,...folders])=>folders.map((spec,k)=>{const[folder,note]=spec.split("|");
-  return{id:OLD_IDS[folder]||folder,folder,name:name+(folders.length>1?" "+arNum(k+1):"")+(note?" ("+note+")":"")}}));
+  return{id:OLD_IDS[folder]||folder,folder,name:name+(folders.length>1?" "+arNum(k+1):"")+(note?" ("+note+")":""),
+    short:name+(note?" ("+note+")":"")}}));   /* short: the name alone, without the number of the recording (top bar) */
 /* lists show reciters in alphabetical order */
 const RECITERS_SORTED=[...RECITERS].sort((a,b)=>a.name.localeCompare(b.name,"ar"));
 const DUAS=[[2,127],[2,128],[2,201],[2,250],[2,286],[3,8],[3,16],[3,53],[3,147],[3,193],[3,194],[7,23],[7,126],[10,85],[10,86],[14,40],[14,41],[17,24],[17,80],[18,10],[20,25],[20,26],[20,114],[21,87],[23,97],[23,98],[23,118],[25,65],[25,74],[28,24],[40,8],[59,10],[60,4],[66,8],[71,28]];
@@ -859,6 +1143,8 @@ if(/[?&]mock=1/.test(location.search)&&!window.AndroidBridge){
     setBars(c,l){log("setBars",[c,l])}
   };
 }
+/* a press this long does a key's second job: 1 s while tips are on (from 0.45 s a tip says what the key does), 0.6 s as before without them */
+const longMs=()=>typeof TIP!=="undefined"&&TIP.on?tipMs()+500:(typeof TOUCH!=="undefined"&&TOUCH.easy?900:600);
 const NA=()=>!!(window.AndroidBridge&&typeof AndroidBridge.audioPlay==="function");
 if(NA())document.body.classList.add("app");
 /* in a browser: the device fills the whole window (like the app) unless turned off in the settings */
@@ -919,33 +1205,37 @@ function fitUnit(){
 
 /* Control buttons: rows top to bottom, each row left to right.
    Every button fills its cell; a clear gap separates neighbours so a finger presses only one. */
-const B={prevS:["prevS","السورة السابقة","prevS"],nextS:["nextS","السورة التالية","nextS"],
-  prev:["prev","الآية السابقة","prev"],next:["next","الآية التالية","next"],
+const B={prevS:["prevS","السورة السابقة","nextS"],nextS:["nextS","السورة التالية","prevS"],   /* arrows from right to left (1.85) */
+  prev:["prev","الآية السابقة","next"],next:["next","الآية التالية","prev"],
   rep:["rep","تكرار","rep"],play:["play","تشغيل / إيقاف","play"],stop:["stop","إيقاف","stop"],
   volDn:["volDn","خفض الصوت","volDn"],volUp:["volUp","رفع الصوت","volUp"],
-  range:["range","من آية إلى آية","",1],hifz:["hifz","تكرار الآيات","",1]};
+  range:["range","من آية إلى آية","",1],hifz:["hifz","تكرار الآيات","",1],cnt:["cnt","عدد التكرار","cnt"],gap:["gap","سكوت","gap"]};
 /* Hidden buttons are left out and the rest of the row (or the next rows) take their space.
    Optional: prevS/nextS (surahNav), to/from (rangeOn), stop (stopOn). */
 function btnOn(f){
   if(f==="prevS"||f==="nextS")return !!BTNV.surahNav;
   if(f==="range")return !!S.rangeOn;
   if(f==="stop")return !!BTNV.stop;
+  if(f==="cnt")return BTNV.cnt!==false;
+  if(f==="gap")return BTNV.gap!==false;
   if(f==="hifz")return typeof HZ!=="undefined"&&HZ?!!HZ.on:store.get("hifzOn",false);
   return true;
 }
+/* grouped by job (1.73): recitation · repetition · sound and readers.
+   A row is laid out left to right, so its last key sits at the right, where an Arabic reader starts. */
 const CTRL_ROWS=[
-  [B.prevS,B.nextS],
-  [B.prev,B.next],
+  [B.nextS,B.prevS],
+  [B.next,B.prev],
   [B.stop,B.play],
-  [B.volDn,B.rep,B.volUp],
-  [B.hifz,B.range],
+  [B.hifz,B.range,B.cnt,B.rep],
+  [B.volDn,B.gap,B.volUp],
   ["R"]
 ];
 /* portrait: the controls run across the bottom of the board */
 const CTRL_ROWS_P=[
-  [B.prevS,B.nextS,B.prev,B.next,B.rep],
-  [B.stop,B.play,B.volDn,B.volUp],
-  [B.hifz,B.range,"R"]
+  [B.nextS,B.next,B.play,B.stop,B.prev,B.prevS],   /* recitation: ◀ play stop ▶ */
+  [B.gap,B.hifz,B.range,B.cnt,B.rep],               /* repetition: تكرار and its count at the right, the silence at the left */
+  [B.volDn,"R",B.volUp]                             /* sound around the three readers */
 ];
 const GAP_X=1.0, GAP_Y=0.7;   /* space between buttons, in layout units */
 function fitBtns(u){const c=document.querySelector(".ctrl");if(!c)return;
@@ -970,16 +1260,22 @@ const HZON=()=>typeof HZ!=="undefined"&&HZ?!!HZ.on:store.get("hifzOn",false);
 const HZBOARD=()=>HZON()&&store.get("hzBoard",true);   /* the five count keys beside «أدعية مختارة» */
 function readerLabel(i){return LOOK.ord?ORD[i]:String(i+1)}
 function readerName(i){return LOOK.ord?ORD[i]:String(i+1)}
-const LOOK=Object.assign({mfull:true,red:false,tint:false,fast:false,stopColor:"black",hzColor:"green",ord:false},store.get("look2",{}));
+const LOOK=Object.assign({mfull:true,red:false,tint:false,fast:false,stopColor:"black",hzColor:"green",ord:false,bstyle:"mod"},store.get("look2",{}));
 /* optional control buttons: the stop button is on, the surah buttons are off until turned on in the settings */
 const BTNV=Object.assign({surahNav:false,stop:true},store.get("btnv",{}));   /* all off until turned on in the settings */
 const S={slots:store.get("slots",["alafasy","abdulbasit","husary"]),active:store.get("active",0),vol:store.get("vol",8),
-  rangeOn:store.get("rangeOn",false),announce:store.get("announce",true),rate:store.get("rate",1),gap:store.get("gap",0),engine:"web",pMs:0,pT0:0,gapOn:false,gapLeft:0,gapAt:0,gapT:0,
+  rangeOn:store.get("rangeOn",true),announce:store.get("announce",true),rate:store.get("rate",1),gap:store.get("gap",0),engine:"web",pMs:0,pT0:0,gapOn:false,gapLeft:0,gapAt:0,gapT:0,
   surah:0,ayah:1,from:1,to:0,phase:"ayah",st:"idle",repeat:0,duas:-1,msg:null,tok:0};
 
 /* how many times an ayah (key «تكرار») or a segment («تكرار الآيات») is read: 0 = without end */
 const REPC={ayah:store.get("repAyahN",0),seg:store.get("repSegN",0)};S.repN=1;
-const REP_OPTS=[0,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50,100];
+/* ayah repeat inside a repeating segment (chosen ayat or «تكرار الآيات») — 1.82, a setting for both views */
+let REPSEG=store.get("repInSeg",true);
+let REPMODE=store.get("repMode","cycle");   /* "cycle" (1.82) or "toggle" (as before) */
+const ayahAgain=()=>S.repeat===1&&(!REPC.ayah||S.repN<REPC.ayah);
+/* how many times the segment now repeating is read: a range chosen in «من آية إلى آية» carries its own count */
+function hzLim(){return S.hifz&&S.hifz.c!=null?S.hifz.c:REPC.seg}
+const REP_OPTS=[0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,30,40,50,100];
 const timesTxt=n=>n===0?"بلا توقف (مستمر)":n===1?"مرة واحدة":n===2?"مرتان":n<=10?n+" مرات":n+" مرة";
 const pad=(n,l=3)=>String(n).padStart(l,"0");
 const reciter=()=>RECITERS.find(r=>r.id===S.slots[S.active])||RECITERS[0];
@@ -1021,6 +1317,7 @@ function ico(name){
    prev:'<path d="M17 5v14L6 12z"/>', next:'<path d="M7 5v14l11-7z"/>',
    prevS:'<path d="M12 5v14L2 12zM22 5v14l-10-7z"/>', nextS:'<path d="M2 5v14l10-7zM12 5v14l10-7z"/>',
    play:'<path d="M3 5v14l9-7z"/><rect x="14" y="5" width="3" height="14"/><rect x="19" y="5" width="3" height="14"/>',
+   gap:'<path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"/>',
    rep:'<path d="M17 3l4 4-4 4V8H8a3 3 0 0 0-3 3v1H3v-1a5 5 0 0 1 5-5h9zM7 21l-4-4 4-4v3h9a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5H7z"/>',
    volUp:'<path d="M3 9h4l5-4v14l-5-4H3z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/>',
    volDn:'<path d="M6 9h4l5-4v14l-5-4H6z"/>',
@@ -1029,7 +1326,7 @@ function ico(name){
 }
 function buildCtrl(rows){
   const c=document.createElement("div");c.className="ctrl";
-  const one=([f,label,icon,txt])=>`<button class="btn${txt?" txt":" cap"}" data-f="${f}" id="f_${f}" aria-label="${label}">${f==="range"?'<span class="rg1">من آية</span><span class="rg2">إلى آية</span>':txt?label:ico(icon)+`<small>${label}</small>`}</button>`;
+  const one=([f,label,icon,txt])=>`<button class="btn${txt?" txt":" cap"}" data-f="${f}" id="f_${f}" aria-label="${label}">${f==="range"?'<span class="rg1">من آية</span><span class="rg2">إلى آية</span>':f==="cnt"?'<b class="cn">×1</b><small>العدد</small>':f==="gap"?ico("gap")+'<small>سكوت</small>':txt?label:ico(icon)+`<small>${label}</small>`}</button>`;
   const readers=()=>[2,1,0].map(i=>`<button class="btn rd${LOOK.ord?" ordw":""}" data-r="${i}" id="r${i}" aria-label="القارئ ${readerName(i)}">${readerLabel(i)}</button>`).join("");
   rows=(rows||CTRL_ROWS).map(row=>row.filter(x=>x==="R"||btnOn(x[0]))).filter(row=>row.length);
   c.innerHTML=rows.map(row=>`<div class="row${row.length===1&&row[0]==="R"?" reciters":""}">${row.map(x=>x==="R"?readers():one(x)).join("")}</div>`).join("");
@@ -1037,10 +1334,15 @@ function buildCtrl(rows){
 }
 /* landscape = the device's own layout; portrait = surahs in rows of ten, controls below */
 const CTRL_ROWS_PL=[
-  [B.prevS,B.nextS,B.prev,B.next,B.rep,B.stop,B.play],
-  [B.volDn,B.volUp,B.hifz,B.range,"R"]
+  [B.volDn,B.nextS,B.next,B.play,B.stop,B.prev,B.prevS,B.volUp],
+  [B.gap,B.hifz,B.range,B.cnt,B.rep,"R"]
 ];
-const curRows=()=>PHONE&&!PORTRAIT?CTRL_ROWS_PL:PORTRAIT?CTRL_ROWS_P:CTRL_ROWS;
+/* the order used up to 1.72, kept as a choice in the settings */
+const CTRL_OLD={L:[[B.nextS,B.prevS],[B.next,B.prev],[B.stop,B.play],[B.volDn,B.rep,B.cnt,B.volUp],[B.gap,B.hifz,B.range],["R"]],
+  P:[[B.nextS,B.prevS,B.next,B.prev,B.rep,B.cnt],[B.stop,B.play,B.gap,B.volDn,B.volUp],[B.hifz,B.range,"R"]],
+  PL:[[B.nextS,B.prevS,B.next,B.prev,B.rep,B.stop,B.play],[B.volDn,B.volUp,B.gap,B.cnt,B.hifz,B.range,"R"]]};
+let CTRL_ORDER=store.get("ctrlOrder","job");
+const curRows=()=>{const o=CTRL_ORDER==="old";return PHONE&&!PORTRAIT?(o?CTRL_OLD.PL:CTRL_ROWS_PL):PORTRAIT?(o?CTRL_OLD.P:CTRL_ROWS_P):(o?CTRL_OLD.L:CTRL_ROWS)};
 /* rebuild the control board after a button is shown or hidden */
 function rebuildCtrl(){const pnl=$("panel"),old=pnl&&pnl.querySelector(".ctrl");if(!old)return;
   old.replaceWith(buildCtrl(curRows()));if(PHONE)placeKeysPhone(PORTRAIT);fitUnit();render()}
@@ -1071,7 +1373,7 @@ function setOrientation(portrait,phone){
   const old=pnl.querySelector(".ctrl");if(old)old.replaceWith(buildCtrl(curRows()));
   if(phone)placeKeysPhone(portrait);else placeKeys(portrait);
   try{render()}catch(e){}
-  try{M.view=store.get(portrait?"mview_p":"mview",portrait?1:2);syncVBtn();if(M.open&&M.data)setTimeout(()=>showSpread(M.spread),50)}catch(e){}
+  try{M.view=store.get(portrait?"mview_p":"mview",portrait?1:2);nvPagesFix();syncVBtn();if(M.open&&M.data)setTimeout(()=>showSpread(M.spread),50)}catch(e){}
 }
 
 /* ===== display ===== */
@@ -1082,10 +1384,10 @@ function render(){
   else if(S.surah){
     const where=S.duas>=0?`<b>أدعية مختارة</b><span>${S.duas+1}/${DUAS.length}</span>`:"";
     const pos=S.gapOn?"⏸ سكوت…":S.phase==="name"?"اسم السورة":S.phase==="bas"?"البسملة":"آية "+S.ayah+" من "+AYAT[S.surah-1];
-    const range=S.hifz?`<b>تكرار الآيات: ${S.hifz.a===S.hifz.b?"الآية "+S.hifz.a:"الآيات "+S.hifz.a+" إلى "+S.hifz.b} · المرة ${S.hifz.n}${REPC.seg?" من "+REPC.seg:""}</b>`:S.to&&S.duas<0?`<span>إلى آية ${S.to}</span>`:"";
-    m.innerHTML=`<b>${reciter().name}</b>${where}<span>سورة ${NAMES[S.surah-1]}</span><span>${pos}</span>${range}${S.st==="loading"?"<span>جارٍ التحميل…</span>":""}`;
-  }else m.innerHTML=`<b>القارئ ${readerName(S.active)}: ${reciter().name}</b><span>اختر سورة للاستماع</span><span class="ver">الإصدار ${APP_VERSION}</span>`;
-  {const g=$("lcdGap"),lb={0.25:"¼",0.5:"½",0.75:"¾",1:"1×"}[S.gap];g.hidden=!lb;
+    const range=S.hifz?`<b>تكرار الآيات: ${S.hifz.a===S.hifz.b?"الآية "+S.hifz.a:"الآيات "+S.hifz.a+" إلى "+S.hifz.b} · المرة ${S.hifz.n}${hzLim()?" من "+hzLim():""}</b>`:S.to&&S.duas<0?`<span>إلى آية ${S.to}</span>`:"";
+    m.innerHTML=`<b>${reciter().short||reciter().name}</b>${where}<span>سورة ${NAMES[S.surah-1]}</span><span>${pos}</span>${range}${S.st==="loading"?"<span>جارٍ التحميل…</span>":""}`;
+  }else m.innerHTML=`<b>${reciter().short||reciter().name}</b><span>اختر سورة للاستماع</span>`;
+  {const g=$("lcdGap"),lb={0.25:"¼",0.5:"½",0.75:"¾",1:"كامل"}[S.gap];g.hidden=!lb;
     if(lb){g.textContent="سكوت "+lb;g.classList.toggle("on",S.gapOn);g.title="السكوت بعد كل آية: "+["","ربع","نصف","ثلاثة أرباع","مثل"][S.gap*4]+" مدة الآية"}}
   $("lcdState").textContent=S.st==="playing"||S.st==="loading"?"▶":(S.st==="paused"?"❚❚":"■");
   $("lcdRep").textContent=["","🔁 آية"+(REPC.ayah?" "+S.repN+"/"+REPC.ayah:""),"🔁 سورة"][S.repeat]+(S.rate!==1?" "+S.rate.toFixed(2).replace(/0$/,"")+"×":"");
@@ -1101,18 +1403,26 @@ function render(){
   if($("f_hifz")&&typeof HZ!=="undefined"&&HZ){$("f_hifz").classList.toggle("lit",!!HZ.open);
     $("f_hifz").classList.toggle("lit",!!S.hifz||!!HZ.open);
     if(HZ.open&&!S.hifz&&S.surah&&S.duas<0&&S.surah!==HZ.s){HZ.s=S.surah;drawRailHifz()}}
+  if(typeof applyKC==="function")applyKC();
+  ["f_gap","s_gap","nvGap"].forEach(id=>{const k=$(id);if(!k)return;{const g=k.querySelector(".gpv");if(g)g.textContent=GAP_TXT[S.gap]||"";else{const m=k.querySelector("small");if(m)m.textContent=S.gap?"سكوت "+GAP_TXT[S.gap]:"سكوت"}}k.classList.toggle("lit",S.gap>0);
+    k.setAttribute("aria-label","السكوت بعد كل آية: "+(GAP_NAME[S.gap]||""))});
+  if($("nvGap"))$("nvGap").hidden=BTNV.gap===false;
+  ["f_rep","f_cnt","s_rep","s_cnt","nvRep","nvCnt"].forEach(id=>{const k=$(id);if(k)k.classList.toggle("segoff",segOn()&&!REPSEG)});
+  {const t=repTag();document.querySelectorAll(".rpb").forEach(x=>x.textContent=t)}
   if($("f_rep")){$("f_rep").classList.toggle("lit",S.repeat>0);
-    $("f_rep").querySelector("small").textContent=["تكرار","تكرار الآية","تكرار السورة"][S.repeat]}
-  if($("f_range")){const on=S.rangeOn&&S.surah&&S.duas<0&&(!!S.to||S.from>1)&&!S.hifz;$("f_range").classList.toggle("lit",!!on);
-    $("f_range").querySelector(".rg2").textContent=on?(S.from||1)+" ← "+(S.to||AYAT[S.surah-1]):"إلى آية"}
-  $("lcdPg").textContent="";
+    $("f_rep").querySelector("small").textContent=repName()}
+  if($("f_range")){const cz=S.hifz&&S.hifz.c!=null,on=cz||S.rangeOn&&S.surah&&S.duas<0&&(!!S.to||S.from>1)&&!S.hifz;$("f_range").classList.toggle("lit",!!on);
+    $("f_range").querySelector(".rg2").textContent=cz?S.hifz.a+" ← "+S.hifz.b:on?(S.from||1)+" ← "+(S.to||AYAT[S.surah-1]):"إلى آية"}
+  {const c=typeof nvCntNow==="function"?nvCntNow():1,t=c===0?"∞":"×"+c,lb=c===1?"عدد التكرار: مرة":"عدد التكرار: "+(c===0?"مستمر":c);
+    ["f_cnt","s_cnt"].forEach(id=>{const k=$(id);if(!k)return;k.querySelector(".cn").textContent=t;k.classList.toggle("lit",c!==1);k.setAttribute("aria-label",lb)})}
+  $("lcdPg").textContent=APP_VERSION;$("lcdPg").title="الإصدار "+APP_VERSION;
   if(typeof M!=="undefined"&&M.open){
     [0,1,2].forEach(i=>$("s_r"+i).classList.toggle("lit",i===S.active));
     $("s_rep").classList.toggle("lit",S.repeat>0);$("s_rep").setAttribute("aria-label",["تكرار","تكرار الآية","تكرار السورة"][S.repeat]);
     $("s_play").classList.toggle("lit",S.st==="playing"||S.st==="loading");
-    $("lcdPg").textContent=M.view===2&&M.spread<604?`الصفحتان ${M.spread} و${M.spread+1}`:`الصفحة ${M.spread}`;
     followPlaying();
   }
+  if(typeof nvRender==="function")nvRender();
 }
 
 /* ===== audio engine ===== */
@@ -1148,7 +1458,8 @@ function ayahMs(){let ms=S.pMs+(S.pT0?Date.now()-S.pT0:0);
   if(S.engine==="web"&&hAudio&&isFinite(hAudio.duration)&&hAudio.duration>0)ms=hAudio.duration*1000/(hAudio.playbackRate||1);
   return Math.min(ms,10*60*1000)}
 function hasNext(){if(S.phase!=="ayah"||S.repeat===2)return true;
-  if(S.hifz)return !REPC.seg||S.hifz.n<REPC.seg||S.ayah<S.hifz.b||S.hifz.b<AYAT[S.surah-1];
+  if(S.hifz&&REPSEG&&ayahAgain())return true;
+  if(S.hifz)return !hzLim()||S.hifz.n<hzLim()||S.ayah<S.hifz.b||(S.hifz.c==null&&S.hifz.b<AYAT[S.surah-1]);
   if(S.repeat===1&&(!REPC.ayah||S.repN<REPC.ayah))return true;
   if(S.duas>=0)return S.duas+1<DUAS.length;return S.ayah<lastAyah()}
 function startGap(ms,t){S.gapOn=true;S.gapLeft=ms;runGap(t);render()}
@@ -1205,7 +1516,10 @@ function start(s,a=1,opts={}){
   playCurrent();
 }
 function peekNext(){
-  if(S.hifz){if(S.ayah<S.hifz.b)return[S.surah,S.ayah+1];if(REPC.seg&&S.hifz.n>=REPC.seg)return S.hifz.b<AYAT[S.surah-1]?[S.surah,S.hifz.b+1]:null;return[S.surah,S.hifz.a]}
+  if(S.phase==="name")return S.surah!==1&&S.surah!==9?[1,1]:[S.surah,1];
+  if(S.phase==="bas")return[S.surah,S.ayah];
+  if(S.hifz&&REPSEG&&ayahAgain())return null;
+  if(S.hifz){if(S.ayah<S.hifz.b)return[S.surah,S.ayah+1];if(hzLim()&&S.hifz.n>=hzLim())return S.hifz.c==null&&S.hifz.b<AYAT[S.surah-1]?[S.surah,S.hifz.b+1]:null;return[S.surah,S.hifz.a]}
   if(S.phase==="name")return S.surah!==1&&S.surah!==9?[1,1]:[S.surah,1];
   if(S.phase==="bas")return[S.surah,1];
   if(S.repeat===1&&(!REPC.ayah||S.repN<REPC.ayah))return null;
@@ -1214,8 +1528,12 @@ function peekNext(){
   return null;
 }
 function advance(){
-  if(S.hifz){if(S.ayah<S.hifz.b)S.ayah++;
-    else if(REPC.seg&&S.hifz.n>=REPC.seg)return nextSegment();   /* read the set number of times: on to the next segment */
+  if(S.phase==="name"){S.phase=S.surah!==1&&S.surah!==9?"bas":"ayah";return playCurrent()}   /* the name and the basmala come first, also before repeated ayat */
+  if(S.phase==="bas"){S.phase="ayah";return playCurrent()}
+  if(S.hifz&&REPSEG&&ayahAgain()){S.repN++;return playCurrent()}   /* the same ayah again, then on in the segment */
+  if(S.hifz){S.repN=1;if(S.ayah<S.hifz.b)S.ayah++;
+    else if(hzLim()&&S.hifz.n>=hzLim()){if(S.hifz.c==null)return nextSegment();   /* chosen ayat: done after their count */
+      const z=S.hifz;S.hifz=null;if(typeof SEL!=="undefined"&&SEL.on)selEnd();render();return finishMsg(z.c===1?`انتهت ${z.a===z.b?"الآية "+z.a:"الآيات "+z.a+" – "+z.b}`:`انتهى تكرار ${z.a===z.b?"الآية "+z.a:"الآيات "+z.a+" – "+z.b} (${timesTxt(z.c)})`)}   /* read the set number of times: on to the next segment */
     else{S.ayah=S.hifz.a;S.hifz.n++}drawHifzNow();return playCurrent()}   /* memorization group: loops without end */
   if(S.phase==="name"){S.phase=S.surah!==1&&S.surah!==9?"bas":"ayah";return playCurrent()}
   if(S.phase==="bas"){S.phase="ayah";return playCurrent()}
@@ -1234,8 +1552,18 @@ function nextSegment(){const z=S.hifz,n=AYAT[z.s-1];
   const a=z.b+1,b=Math.min(a+Math.max(1,HZ.size)-1,n);S.hifz={s:z.s,a,b,n:1};S.ayah=a;
   if(HZ.open){drawRailHifz()}else drawHifzNow();
   flash(a===b?"الآية التالية: "+a:"المقطع التالي: الآيات "+a+" إلى "+b,2200);return playCurrent()}
-function cycleRep(){if(breakHifz())return;S.repeat=(S.repeat+1)%3;S.repN=1;
-  flash(S.repeat===1?"تكرار الآية: "+timesTxt(REPC.ayah)+(REPC.ayah?" ثم التالية":""):S.repeat===2?"تكرار السورة":"بدون تكرار",1800)}
+/* «تكرار»: a press turns ayah repeat on, the next press turns it off; a long press turns surah repeat on/off */
+function repSurah(){if(segOn()){flash("يتكرر مقطع الآن — تكرار السورة بعد انتهائه أو بعد «إيقاف»",2400);return}S.repeat=S.repeat===2?0:2;S.repN=1;try{if(!NA()&&navigator.vibrate&&wasActive())navigator.vibrate(30)}catch(e){}
+  flash(S.repeat===2?"تكرار السورة (اضغط «تكرار» لإيقافه)":"بدون تكرار",2000)}
+function cycleRep(){if(segBusy())return;const max=(typeof NV!=="undefined"&&NV.cntMax)||5;
+  if(REPMODE==="toggle"){S.repeat=S.repeat?0:1;S.repN=1;
+    flash(S.repeat===1?"تكرار الآية: "+timesTxt(REPC.ayah)+(REPC.ayah?" ثم التالية":""):"بدون تكرار — اضغط مطوّلًا لتكرار السورة",1800);return render()}
+  if(S.repeat!==1){S.repeat=1;REPC.ayah=0}
+  else if(REPC.ayah===0)REPC.ayah=2;
+  else if(REPC.ayah<max)REPC.ayah++;
+  else S.repeat=0;
+  store.set("repAyahN",REPC.ayah);if($("repAyahN"))$("repAyahN").value=String(REPC.ayah);S.repN=1;
+  flash(S.repeat===1?(REPC.ayah?"تكرار كل آية "+timesTxt(REPC.ayah)+" ثم التالية":"تكرار الآية بلا توقف"):"بدون تكرار — اضغط مطوّلًا لتكرار السورة",1800);render()}
 function finishMsg(t){S.st="ended";screenOn(false);flash(t,3000)}
 function finish(){S.st="ended";screenOn(false);flash("انتهت التلاوة",3000)}
 function pause(){S.st="paused";if(S.pT0){S.pMs+=Date.now()-S.pT0;S.pT0=0}
@@ -1250,6 +1578,61 @@ function togglePlay(){
   playCurrent();
 }
 function stopAudio(){clearGap();S.tok++;try{window.speechSynthesis&&speechSynthesis.cancel()}catch(e){}try{if(NA())AndroidBridge.audioStop()}catch(e){}if(hAudio){hAudio.pause();hAudio.removeAttribute("src");hAudio.load()}S.engine="web"}
+/* the «إيقاف» keys: stop the sound and cancel every repetition (ayah, surah, chosen ayat), close the choosing bar */
+/* «سكوت»: each press: ¼ ← ½ ← ¾ ← as long as the ayah ← none (the same setting as «مدة السكوت») */
+const GAPS=[0,0.25,0.5,0.75,1],GAP_TXT={0:"",0.25:"¼",0.5:"½",0.75:"¾",1:"كامل"},GAP_NAME={0:"بدون سكوت",0.25:"ربع مدة الآية",0.5:"نصف مدة الآية",0.75:"ثلاثة أرباع مدة الآية",1:"مثل مدة الآية"};
+function cycleGap(){const i=GAPS.indexOf(S.gap);S.gap=GAPS[(i+1)%GAPS.length];store.set("gap",S.gap);if($("gapSel"))$("gapSel").value=String(S.gap);
+  if(!S.gap&&S.gapOn){clearTimeout(S.gapT);S.gapOn=false;advance()}   /* a silence now running ends at once */
+  flash(S.gap?"السكوت بعد كل آية: "+GAP_NAME[S.gap]:"بدون سكوت بعد الآيات",1800);render()}
+/* ===== surah colours: any surah, in the old view's keys and in the new view's list (1.83) ===== */
+const SC_COLORS={green:["#d3efd9","#123f2c","#1f6b46","أخضر"],blue:["#d6e6fb","#0f2f5c","#1f5fbf","أزرق"],gold:["#fbefc4","#5a4300","#a87600","ذهبي"],
+  rose:["#fadadf","#5c1622","#b8324a","وردي"],purple:["#e6dcf7","#33195e","#6b3fb3","بنفسجي"],orange:["#fde0c8","#5c2a00","#c2580e","برتقالي"],teal:["#d2eeee","#0e3e3e","#1d7a7a","فيروزي"]};
+const scDefault=()=>{const o={2:"green"};for(let i=78;i<=114;i++)o[i]="green";return o};
+let SCOL=store.get("scolors",null)||scDefault();
+const SCV={old:store.get("scolOld",true),nw:store.get("scolNew",true)};
+(function(){let css="";for(const[k,[bg,ink,num]]of Object.entries(SC_COLORS)){
+  css+=`body.scold .key[data-c="${k}"]:not(.on){background:${bg}}body.scold .key[data-c="${k}"]:not(.on) .nm{color:${ink}}body.scold .key[data-c="${k}"]:not(.on) .no{background:${num};color:#fff}`;
+  css+=`body.scnew .nvlg button[data-c="${k}"]{background:${bg}}body.scnew .nvlg button[data-c="${k}"] span{color:${ink}}body.scnew .nvlg button[data-c="${k}"] b{background:${num};color:#fff}`;
+  css+=`.card .scpal button[data-c="${k}"],.card .scgrid button[data-c="${k}"]{background:${bg};color:${ink}}`}
+  const st=document.createElement("style");st.textContent=css;document.head.appendChild(st)})();
+function applySC(){document.body.classList.toggle("scold",SCV.old);document.body.classList.toggle("scnew",SCV.nw);
+  document.querySelectorAll(".key[data-s],#nvLg button[data-s]").forEach(b=>{const c=SCOL[b.dataset.s];if(c&&SC_COLORS[c])b.dataset.c=c;else b.removeAttribute("data-c")})}
+let SCB=store.get("scBrush","green");   /* the colour chosen to paint with; "" = remove */
+function scDraw(){const g=$("scGrid");if(!g)return;
+  $("scPal").innerHTML=`<button type="button" data-c="" class="${SCB?"":"on"}" style="background:#fff">بلا لون (مسح)</button>`+Object.entries(SC_COLORS).map(([k,v])=>`<button type="button" data-c="${k}" class="${SCB===k?"on":""}">${v[3]}</button>`).join("");
+  g.innerHTML=NAMES.map((n,i)=>{const c=SCOL[i+1];return `<button type="button" data-s="${i+1}"${c&&SC_COLORS[c]?` data-c="${c}"`:""} title="${n}"><i>${i+1}</i><span>${n}</span></button>`}).join("");
+  $("scAll").textContent=SCB?`تلوين كل السور (${SC_COLORS[SCB][3]})`:"إزالة لون كل السور";
+  $("scAmma").textContent=SCB?`تلوين جزء عمّ (${SC_COLORS[SCB][3]})`:"إزالة لون جزء عمّ";
+  $("scOld").checked=SCV.old;$("scNew").checked=SCV.nw}
+function scPaint(list){for(const n of list){if(SCB)SCOL[n]=SCB;else delete SCOL[n]}scSave()}
+function scSave(){store.set("scolors",SCOL);applySC();scDraw()}
+/* ===== key colours: paint any control key, the same key in both views (1.87) ===== */
+const KC_COLORS={blue:["#2f6fd6","#1d4f9e","أزرق"],green:["#1f9a5a","#13693c","أخضر"],red:["#d23b3b","#962424","أحمر"],orange:["#e07b12","#a3570a","برتقالي"],
+  purple:["#7b4fc9","#55329a","بنفسجي"],teal:["#0f9b8e","#0a6b62","فيروزي"],pink:["#d0457f","#962d59","وردي"],gold:["#b8860b","#7f5c06","ذهبي"],brown:["#8a5a2b","#5e3c1b","بني"],dark:["#2b3442","#141a23","داكن"]};
+const KC_KEYS=[["play","تشغيل / مؤقت",'#f_play,#s_play,[data-nv="listen"],[data-nv="pause"]'],["stop","إيقاف",'#f_stop,[data-nv="stop"]'],
+  ["rep","تكرار",'#f_rep,#s_rep,[data-nv="rep"]'],["cnt","العدد",'#f_cnt,#s_cnt,[data-nv="cnt"]'],["gap","سكوت",'#f_gap,#s_gap,[data-nv="gap"]'],
+  ["next","الآية التالية",'#f_next,#s_next'],["prev","الآية السابقة",'#f_prev,#s_prev'],["nextS","السورة التالية","#f_nextS"],["prevS","السورة السابقة","#f_prevS"],
+  ["vol","رفع وخفض الصوت","#f_volDn,#f_volUp"],["range","تحديد الآيات",'#f_range,[data-nv="ayat"]'],["hifz","تكرار الآيات (الحفظ)","#f_hifz"],
+  ["r0","القارئ الأول",'#r0,#s_r0,[data-nv="r0"]'],["r1","القارئ الثاني",'#r1,#s_r1,[data-nv="r1"]'],["r2","القارئ الثالث",'#r2,#s_r2,[data-nv="r2"]'],
+  ["pg","تقليب الصفحات","#s_pgNext,#s_pgPrev"],["mus","المصحف",".key.mus,#mBtn"],["list","قائمة السور",'[data-nv="list"]'],["dl","التنزيل",'[data-nv="dl"]'],["set","الإعدادات",'[data-nv="set"]']];
+const KC_SUGGEST={play:"green",stop:"red",rep:"orange",cnt:"purple",gap:"teal",range:"pink",hifz:"brown",next:"dark",prev:"dark",nextS:"dark",prevS:"dark",pg:"dark"};
+let KCOL=store.get("kcolors",{}),KCB=store.get("kcBrush","green"),KCV=store.get("kcOn",true);
+(function(){let css="";for(const[k,[bg,dk]]of Object.entries(KC_COLORS)){
+  /* the colour stays when the key is lit; the lit key keeps its gold ring */
+  css+=`html body.kcol.kcol.kcol [data-kc="${k}"][data-kc]{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 55%),${bg}!important;color:#fff!important}body.kcol [data-kc="${k}"]:not(.lit):not(.on):not(.cur){border-color:${dk}!important}`;
+  css+=`.card .kcgrid button[data-c="${k}"],.card #kcPal button[data-c="${k}"]{background:${bg};color:#fff;border-color:${dk}}`}
+  const st=document.createElement("style");st.textContent=css;document.head.appendChild(st)})();
+function applyKC(){document.body.classList.toggle("kcol",!!KCV);
+  document.querySelectorAll("[data-kc]").forEach(e=>e.removeAttribute("data-kc"));
+  for(const[k,,sel]of KC_KEYS){const c=KCOL[k];if(c&&KC_COLORS[c])document.querySelectorAll(sel).forEach(e=>e.dataset.kc=c)}}
+function kcDraw(){const g=$("kcGrid");if(!g)return;
+  $("kcPal").innerHTML=`<button type="button" data-c="" class="${KCB?"":"on"}" style="background:#fff">الأصلي (مسح)</button>`+Object.entries(KC_COLORS).map(([k,v])=>`<button type="button" data-c="${k}" class="${KCB===k?"on":""}">${v[2]}</button>`).join("");
+  g.innerHTML=KC_KEYS.map(([k,n])=>`<button type="button" data-k="${k}"${KCOL[k]&&KC_COLORS[KCOL[k]]?` data-c="${KCOL[k]}"`:""}>${n}</button>`).join("");
+  $("kcAll").textContent=KCB?`تلوين كل المفاتيح (${KC_COLORS[KCB][2]})`:"إرجاع كل المفاتيح للأصلي";$("kcOn").checked=!!KCV}
+function kcSave(){store.set("kcolors",KCOL);applyKC();kcDraw()}
+function stopKey(){const sel=typeof SEL!=="undefined"&&SEL.on,had=S.repeat||S.hifz||sel;
+  if(sel)selEnd();S.repeat=0;S.repN=1;if(typeof NV!=="undefined"&&NV)NV.player=false;stopAll();
+  if(had)flash("أُوقفت التلاوة وأُلغي التكرار",1800)}
 function stopAll(){S.hifz=null;if(typeof HZ!=="undefined"&&HZ){HZ.lock=0;if(HZ.open)closeHifz()}stopPrompt();stopAudio();S.st="idle";S.surah=0;S.duas=-1;S.to=0;screenOn(false);render()}
 let wake=null;
 function screenOn(on){
@@ -1273,13 +1656,16 @@ function volume(d){
 }
 
 /* ===== range picker (one key «من آية إلى آية»): first tap = start, second tap = end ===== */
-const PK={s:1,n:7,a:1,b:7,w:"a"};
-function openPick(){
-  const s=S.surah&&S.duas<0?S.surah:(store.get("last",[1,1])[0]||1),n=AYAT[s-1];
+const PK={s:1,n:7,a:1,b:7,w:"a",rep:store.get("rangeRep",3)};
+const RG_REPS=[1,2,3,4,5,7,10,0];
+function openPick(sIn){
+  const s=sIn||(S.surah&&S.duas<0?S.surah:(store.get("last",[1,1])[0]||1)),n=AYAT[s-1];
   PK.s=s;PK.n=n;
-  if(S.surah===s&&S.duas<0){PK.a=S.from||S.ayah||1;PK.b=S.to||n}else{PK.a=1;PK.b=n}
+  if(S.hifz&&S.hifz.s===s){PK.a=S.hifz.a;PK.b=S.hifz.b}
+  else if(S.surah===s&&S.duas<0){PK.a=S.from||S.ayah||1;PK.b=S.to||n}else{PK.a=1;PK.b=n}
+  {const sel=$("pickS");if(!sel.options.length)sel.innerHTML=NAMES.map((x,i)=>`<option value="${i+1}">${i+1}. ${x}</option>`).join("");sel.value=s}
   if(PK.b<PK.a)PK.b=n;PK.w="a";
-  $("pickTitle").textContent=`من آية إلى آية — سورة ${NAMES[s-1]}`;
+  $("pickTitle").textContent="من آية إلى آية";
   $("pickGrid").innerHTML=Array.from({length:n},(_,i)=>`<button data-a="${i+1}">${i+1}</button>`).join("");
   $("pickGrid").dataset.s=s;drawPick();$("pick").hidden=false;
   {const x=$("pickGrid").querySelector(".ra");if(x)x.scrollIntoView({block:"center"})}
@@ -1290,7 +1676,9 @@ function drawPick(){
   $("pickHint").textContent=PK.w==="a"?"اضغط الآية التي تبدأ منها التلاوة.":"اضغط الآية التي تتوقف عندها التلاوة (أو تُعاد منها مع تكرار السورة).";
   $("pickGrid").querySelectorAll("button").forEach(b=>{const a=+b.dataset.a;
     b.classList.toggle("ra",a===PK.a);b.classList.toggle("rb",a===PK.b);b.classList.toggle("rin",a>PK.a&&a<PK.b)});
-  const c=PK.b-PK.a+1;$("rgGo").textContent=`▶ ابدأ التلاوة (${c===1?"آية واحدة":c===2?"آيتان":c<=10?c+" آيات":c+" آية"})`;
+  const c=PK.b-PK.a+1,cw=c===1?"آية واحدة":c===2?"آيتان":c<=10?c+" آيات":c+" آية";
+  $("rgReps").innerHTML=RG_REPS.map(k=>`<button data-r="${k}" class="${k===PK.rep?"on":""}">${k===1?"مرة":k===0?"∞":"×"+k}</button>`).join("");
+  $("rgGo").textContent=PK.rep===1?`▶ ابدأ التلاوة (${cw})`:`🔁 كرّر ${PK.rep===0?"بلا توقف":timesTxt(PK.rep)}: ${c===1?"الآية "+PK.a:"من آية "+PK.a+" إلى "+PK.b}`;
 }
 $("rgFrom").onclick=()=>{PK.w="a";drawPick()};
 $("rgTo").onclick=()=>{PK.w="b";drawPick()};
@@ -1300,22 +1688,30 @@ $("pickGrid").addEventListener("click",e=>{const b=e.target.closest("button");if
   if(PK.w==="a"){PK.a=a;if(PK.b<a)PK.b=PK.n;PK.w="b"}
   else{if(a<PK.a){PK.b=PK.a;PK.a=a}else PK.b=a;PK.w="a"}
   drawPick()});
+/* read ayat a..b of surah s: rep = 1 once, 0 without end, n times then stop */
+function playRange(s,a,b,rep){if(typeof NV!=="undefined")NV.player=true;   /* «مرة» too: the ayat are read once and the recitation stops after the last */
+  if(S.hifz){stopPrompt();S.hifz=null;HZ.lock=0}start(s,a,{noBas:a!==1});S.to=0;S.hifz={s,a,b,n:1,c:rep};
+  flash(`${a===b?"الآية "+a:"الآيات "+a+" إلى "+b}: ${rep===0?"بلا توقف":timesTxt(rep)}`,2400);render()}
+$("rgReps").addEventListener("click",e=>{const b=e.target.closest("button[data-r]");if(!b)return;PK.rep=+b.dataset.r;store.set("rangeRep",PK.rep);drawPick()});
+$("pickS").addEventListener("change",e=>{const s=+e.target.value;PK.s=s;PK.n=AYAT[s-1];PK.a=1;PK.b=PK.n;PK.w="a";
+  $("pickGrid").innerHTML=Array.from({length:PK.n},(_,i)=>`<button data-a="${i+1}">${i+1}</button>`).join("");$("pickGrid").dataset.s=s;$("pickGrid").scrollTop=0;drawPick()});
 $("rgGo").onclick=()=>{$("pick").hidden=true;const{s,a,b,n}=PK;
-  start(s,a,{noBas:a!==1});S.to=b<n?b:0;
-  flash(a===b?`تلاوة الآية ${a}`:`التلاوة من آية ${a} إلى ${b<n?"آية "+b:"آخر السورة"}`,2200);render()};
+  if(typeof NV!=="undefined")NV.player=true;
+  playRange(s,a,b,PK.rep)};
 $("pickX").onclick=()=>{$("pick").hidden=true};
+$("rgMus").onclick=()=>{$("pick").hidden=true;selStart()};
 $("pick").addEventListener("click",e=>{if(e.target.id==="pick")$("pick").hidden=true});
 
 /* ===== reciters & settings ===== */
 function pickReciter(i){
   S.active=i;store.set("active",i);
   if(S.surah&&(S.st==="playing"||S.st==="loading"))playCurrent();
-  else flash(`القارئ ${readerName(i)}: ${reciter().name}`);
+  else flash(reciter().short||reciter().name);
   render();
 }
 function openSheet(focus){
   $("slots").innerHTML=[0,1,2].map(i=>`<label class="slot" for="slot${i}"><span class="n">${i+1}</span><select id="slot${i}" data-i="${i}">${RECITERS_SORTED.map(r=>`<option value="${r.id}"${r.id===S.slots[i]?" selected":""}>${r.name}</option>`).join("")}</select></label>`).join("");
-  $("verNo").textContent=APP_VERSION;$("devInfo").textContent=`WebView ${(navigator.userAgent.match(/Chrome\/(\d+)/)||[,"?"])[1]} · ${innerWidth}×${innerHeight} · ${devicePixelRatio}x`;$("rangeOn").checked=S.rangeOn;$("scrollOn").checked=SCROLLKEYS;$("stopOn").checked=BTNV.stop;$("surahNavOn").checked=BTNV.surahNav;$("stopColor").value=LOOK.stopColor;$("redOn").checked=LOOK.red;$("tintOn").checked=LOOK.tint;$("fastOn").checked=LOOK.fast;$("fullOn").checked=FULL;$("hifzOn").checked=HZ.on;$("hifzSize").value=HZ.size;$("mushafOn").checked=M.btnOn;$("hifzColor").value=LOOK.hzColor;$("ordOn").checked=LOOK.ord;$("hzKeys").checked=HZ.keysOn;$("hzBoard").checked=store.get("hzBoard",true);$("hzLock").checked=HZ.lockOn;$("hzVoice").checked=HZ.voice;$("hzBreak").checked=HZ.breakOn;$("announce").checked=S.announce;$("mfullOn").checked=LOOK.mfull;$("medSel").value=String(M.ed);$("gapSel").value=String(S.gap);$("repAyahN").value=String(REPC.ayah);$("repSegN").value=String(REPC.seg);$("mTap").value=MT.mode;$("fillOn").checked=FILLW;syncRate();$("sheet").hidden=false;if(focus!=null){showTab("rec");$("slot"+focus).focus()}else showTab(store.get("setTab","rec"));
+  $("verNo").textContent=APP_VERSION;$("devInfo").textContent=`WebView ${(navigator.userAgent.match(/Chrome\/(\d+)/)||[,"?"])[1]} · ${innerWidth}×${innerHeight} · ${devicePixelRatio}x`;$("rangeOn").checked=S.rangeOn;$("scrollOn").checked=SCROLLKEYS;$("stopOn").checked=BTNV.stop;$("surahNavOn").checked=BTNV.surahNav;$("cntOn").checked=BTNV.cnt!==false;$("gapOn").checked=BTNV.gap!==false;$("stopColor").value=LOOK.stopColor;$("redOn").checked=LOOK.red;$("tintOn").checked=LOOK.tint;$("fastOn").checked=LOOK.fast;$("fullOn").checked=FULL;$("hifzOn").checked=HZ.on;$("hifzSize").value=HZ.size;$("mushafOn").checked=M.btnOn;$("hifzColor").value=LOOK.hzColor;$("ordOn").checked=LOOK.ord;$("hzKeys").checked=HZ.keysOn;$("hzBoard").checked=store.get("hzBoard",true);$("hzLock").checked=HZ.lockOn;$("hzVoice").checked=HZ.voice;$("hzBreak").checked=HZ.breakOn;$("announce").checked=S.announce;$("mfullOn").checked=LOOK.mfull;$("medSel").value=String(M.ed);$("gapSel").value=String(S.gap);$("repAyahN").value=String(REPC.ayah);$("repSegN").value=String(REPC.seg);$("mTap").value=MT.mode;$("fillOn").checked=FILLW;syncRate();$("sheet").hidden=false;if(focus!=null){showTab("rec");$("slot"+focus).focus()}else showTab(store.get("setTab","rec"));
 }
 const closeSheet=()=>{$("sheet").hidden=true;try{stopPreview()}catch(e){}};
 
@@ -1330,22 +1726,27 @@ function addFace(name,urls){
 }
 /* page fonts: inside the app they come from f/ (downloaded once by the app, then kept); on a computer from the CDN */
 const PF_CDN="https://cdn.jsdelivr.net/gh/zonetecde/mushaf-layout@421e9eaa991897ecd50d7abb79160651a45976d3/fonts/QPC2/";
-/* Two mushafs from the King Fahd Complex: 2 = Madinah print of 1421 (QPC V2, kept by the app in f/),
+/* Two mushafs from the King Fahd Complex: 2 = Madinah print of 1423 (QPC V2, kept by the app in f/),
    1 = Madinah print of 1405 (QPC V1: bolder letters), its page fonts kept in the page's own storage (Cache Storage). */
-const ED={2:{fam:"QP",data:"mushaf-data.js",gv:"QDATA",key:"mpages"},1:{fam:"Q1P",data:"mushaf-data1.js",gv:"QDATA1",key:"mpages1"}};
+const ED={2:{fam:"QP",data:"mushaf-data.js",gv:"QDATA",key:"mpages"},1:{fam:"Q1P",data:"mushaf-data1.js",gv:"QDATA1",key:"mpages1"},
+  4:{fam:"Q4P",data:"mushaf-data.js",gv:"QDATA",key:"mpages4"}};
+/* 4 = V4: the same pages as the 1423 print (same glyph codes, code_v2) with the tajweed colours drawn by the font
+   (KFGQPC V4 colour fonts, COLRv1, as served by Quran.com). Older WebViews without colour fonts show it in black. */
+const PF4="https://verses.quran.foundation/fonts/quran/hafs/v4/colrv1/woff2/";
+const dataEd=ed=>ed===4?2:ed;
 const PF1=["https://cdn.jsdelivr.net/gh/zonetecde/mushaf-layout@421e9eaa991897ecd50d7abb79160651a45976d3/fonts/QPC1/"];
 const famOf=p=>ED[M.ed].fam+p;
-/* In the Android app the 1421 pages are kept by the app itself (f/). Anywhere else (a browser, GitHub Pages)
+/* In the Android app the 1423 pages are kept by the app itself (f/). Anywhere else (a browser, GitHub Pages)
    both mushafs keep their page fonts in Cache Storage, so a downloaded mushaf opens without internet. */
 const inApp=()=>!!window.AndroidBridge;
-async function edBuf(ed,p,onlyStore){const urls=ed===1?PF1.map(b=>b+"p"+pad3(p)+".woff2"):pageUrls(p),key=ed===1?urls[0]:PF_CDN+"p"+pad3(p)+".woff2";let c=null;
-  if(hasCache()){try{c=await caches.open(ed===1?"mm-q1":"mm-q2");const r=await c.match(key);if(r){if(onlyStore)return true;return await r.arrayBuffer()}}catch(e){c=null}}
+async function edBuf(ed,p,onlyStore){const urls=ed===1?PF1.map(b=>b+"p"+pad3(p)+".woff2"):ed===4?[PF4+"p"+p+".woff2"]:pageUrls(p),key=ed===1||ed===4?urls[0]:PF_CDN+"p"+pad3(p)+".woff2";let c=null;
+  if(hasCache()){try{c=await caches.open(ed===1?"mm-q1":ed===4?"mm-q4":"mm-q2");const r=await c.match(key);if(r){if(onlyStore)return true;return await r.arrayBuffer()}}catch(e){c=null}}
   for(const u of urls){try{const r=await fetch(u);if(r.ok){const b=await r.arrayBuffer();
     if(b.byteLength>1000){if(c){try{await c.put(key,new Response(b,{headers:{"Content-Type":"font/woff2"}}))}catch(e){}}return b}}}catch(e){}}
   throw new Error("font "+p)}
 function addFaceBuf(ed,p){const name=ED[ed].fam+p;if(fontsLoaded[name])return fontsLoaded[name];
   return fontsLoaded[name]=(async()=>{try{const f=new FontFace(name,await edBuf(ed,p));await f.load();document.fonts.add(f);return true}catch(e){delete fontsLoaded[name];throw e}})()}
-const pageFont=p=>{const ed=M.ed;return(ed===1||!inApp()?addFaceBuf(ed,p):addFace("QP"+p,pageUrls(p))).then(r=>(markPage(p,ed),r))};
+const pageFont=p=>{const ed=M.ed;return(ed===1||ed===4||!inApp()?addFaceBuf(ed,p):addFace("QP"+p,pageUrls(p))).then(r=>(markPage(p,ed),r))};
 const pageUrls=p=>["f/p"+pad3(p)+".woff2",PF_CDN+"p"+p+".woff2",PF_CDN+"p"+pad3(p)+".woff2"];
 /* ---- download all 604 page fonts so the mushaf works offline ---- */
 const havePages={};
@@ -1357,7 +1758,7 @@ const dlEd=()=>mdl.run?mdl.ed:(+$("mdlEd").value||M.ed);
 function syncMdl(){const ed=dlEd(),n=pagesHave(ed).size;$("mdlEd").value=String(ed);$("mdlEd").disabled=mdl.run;
   $("mdlCount").textContent=n>=604?"✓ كل الصفحات منزّلة وتعمل بدون إنترنت":`المنزّل ${n} من 604 صفحة`;
   $("mdlGo").hidden=mdl.run||n>=604;$("mdlStop").hidden=!mdl.run;$("mdlProg").hidden=!mdl.run&&!mdl.done}
-async function fetchPage(p,ed){if(ed===1||!inApp()){try{return!!await edBuf(ed,p,true)}catch(e){return false}}
+async function fetchPage(p,ed){if(ed===1||ed===4||!inApp()){try{return!!await edBuf(ed,p,true)}catch(e){return false}}
   for(const u of pageUrls(p)){try{const r=await fetch(u);if(r.ok){const b=await r.arrayBuffer();if(b.byteLength>1000)return true}}catch(e){}}return false}
 $("mdlEd").addEventListener("change",()=>{mdl.done=0;$("mdlT").textContent="";syncMdl()});
 $("mdlOpen").onclick=()=>{closeSheet();$("mdlEd").value=String(M.ed);openDl()};
@@ -1372,16 +1773,16 @@ $("mdlGo").onclick=async()=>{
   $("mdlT").textContent=mdl.fails?`انتهى، وتعذّر ${mdl.fails} صفحة — اضغط مرة أخرى لإكمالها`:"اكتمل تنزيل صفحات المصحف ✓";
 };
 $("mdlStop").onclick=()=>{mdl.job++;mdl.run=false;saveHave(mdl.ed);syncMdl();$("mdlT").textContent="أُوقف التنزيل"};
-M.ed=store.get("med",2)===1?1:2;M.datas={};M.loads={};
-function loadMushafData(){const ed=M.ed;
+M.ed=[1,2,4].includes(store.get("med",2))?store.get("med",2):2;M.datas={};M.loads={};
+function loadMushafData(){const ed=dataEd(M.ed);
   if(M.datas[ed])return Promise.resolve(M.data=M.datas[ed]);
   return M.loads[ed]||(M.loads[ed]=new Promise((res,rej)=>{const s=document.createElement("script");s.src=ED[ed].data;
-    s.onload=()=>{M.datas[ed]=window[ED[ed].gv];if(M.ed===ed)M.data=M.datas[ed];res(M.datas[ed])};
+    s.onload=()=>{M.datas[ed]=window[ED[ed].gv];if(dataEd(M.ed)===ed)M.data=M.datas[ed];res(M.datas[ed])};
     s.onerror=()=>{M.loads[ed]=null;rej(new Error("data"))};document.head.appendChild(s)}));
 }
-function setEdition(ed){if(ed===M.ed)return;M.ed=ed;store.set("med",ed);M.data=M.datas[ed]||null;M.lastV=-2;
+function setEdition(ed){if(ed===M.ed)return;M.ed=ed;store.set("med",ed);M.data=M.datas[dataEd(ed)]||null;M.lastV=-2;
   if(M.open){M.rendered++;openMushaf(true)}}
-M.view=store.get(PORTRAIT?"mview_p":"mview",PORTRAIT?1:2);   /* 2 = two facing pages, 1 = one page; remembered separately upright and sideways */
+M.view=store.get(PORTRAIT?"mview_p":"mview",PORTRAIT?1:2);if(typeof nvPagesFix==="function")nvPagesFix();   /* 2 = two facing pages, 1 = one page; remembered separately upright and sideways */
 const spreadOf=pg=>M.view===1?pg:(pg%2?pg:pg-1);   /* right page is odd (الفاتحة on the right) */
 const curVerse=()=>S.surah&&S.duas<0&&S.phase==="ayah"?VSTART[S.surah-1]+S.ayah-1:(S.surah&&S.duas<0?VSTART[S.surah-1]:-1);
 function buildPage(pg,W,H,side){
@@ -1413,27 +1814,34 @@ function fitPage(el,pg){
   el.querySelectorAll(".ln").forEach(r=>r.style.fontSize=fs+"px");
   el.querySelectorAll(".bs,.hd .nm").forEach(r=>r.style.fontSize=(fs*.95)+"px");
 }
-async function showSpread(first){if(!M.data)await loadMushafData();
-  first=Math.max(1,Math.min(M.view===1?604:603,spreadOf(first)));M.spread=first;const n=++M.rendered;
-  try{store.set("mpage",first)}catch(e){}
+const clampSpread=first=>Math.max(1,Math.min(M.view===1?604:603,spreadOf(first)));
+/* the pages of a spread, at the size they have on the screen (used for the shown spread and the one turned in) */
+function buildSpread(first){
+  first=clampSpread(first);
   const box=$("spread"),B=$("mushaf").getBoundingClientRect(),gap=B.width*.005;
   let H=B.height*.97,W=H/1.5;if(W*2+gap>B.width*.98){W=(B.width*.98-gap)/2;H=W*1.5}
   if(M.view===1){W=PORTRAIT?Math.min(B.width*.97,B.height*.97/1.5):Math.min(B.width*.94,B.height*1.15);H=W*1.5}   /* one page: whole page when upright, wider and scrolling when sideways */
-  box.classList.toggle("one",M.view===1);box.scrollTop=0;
+  box.classList.toggle("one",M.view===1);
   /* full screen: the page takes all the room it has (upright single page, or the two facing pages), not the printed page's shape */
   M.full=LOOK.mfull&&(M.view===2||PORTRAIT);
   if(M.full){const cs=getComputedStyle(box),ph=box.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
     if(M.view===1){W=box.clientWidth*.985;H=ph-1}else{W=(box.clientWidth*.99-gap)/2;H=ph*.985}}
   const pages=(M.view===1?[first]:[first,first+1]).filter(p=>p<=604);
-  const els=pages.map((p,i)=>buildPage(p,W,H,i?"l":"r"));
-  box.replaceChildren(...els);markPlaying();
+  return{first,pages,els:pages.map((p,i)=>buildPage(p,W,H,i?"l":"r"))};
+}
+async function showSpread(first,pre){if(!M.data)await loadMushafData();
+  if(!pre)flipReset();
+  first=clampSpread(first);M.spread=first;const n=++M.rendered;
+  try{store.set("mpage",first)}catch(e){}
+  const box=$("spread"),sp=pre&&pre.first===first?pre:buildSpread(first),pages=sp.pages,els=sp.els;
+  box.scrollTop=0;box.replaceChildren(...els);markPlaying();
   $("mload").hidden=false;$("mload").textContent="جارٍ تحميل الصفحة…";
   await Promise.all([addFace("QAMIRI",["f/AMIRI.woff2"]).catch(()=>{}),addFace("QBSML",["f/BSML.ttf"]).catch(()=>{})]);
   let failed=false;
   for(const[i,p]of pages.entries()){
     try{await pageFont(p)}catch(e){failed=true}
     if(n!==M.rendered)return;
-    fitPage(els[i],p);els[i].classList.remove("loading");markPlaying();
+    if(els[i].classList.contains("loading")){fitPage(els[i],p);els[i].classList.remove("loading")}markPlaying();
   }
   for(const p of[first+1,first+2,first+3,first-2,first-1])if(p>=1&&p<=604)pageFont(p).catch(()=>{});
   scrollToPlaying();
@@ -1441,7 +1849,7 @@ async function showSpread(first){if(!M.data)await loadMushafData();
   render();
 }
 function markPlaying(){
-  if(!M.open)return;const v=curVerse();
+  if(!M.open)return;selMark();const v=curVerse();
   $("spread").querySelectorAll("span.pl").forEach(s=>s.classList.remove("pl"));
   $("spread").querySelectorAll(".hlband").forEach(b=>b.remove());
   if(v<0)return;$("spread").querySelectorAll(`span[data-v="${v}"]`).forEach(s=>s.classList.add("pl"));
@@ -1464,9 +1872,9 @@ $("vBtn").onclick=()=>setView(M.view===1?2:1);
 function followPlaying(){
   if(!M.open||!M.data)return;const v=curVerse();if(v<0)return;
   if(v===M.lastV)return markPlaying();M.lastV=v;     /* turn the page only when the ayah changes, so browsing is not interrupted */
-  const pg=M.data.vp[v];if(spreadOf(pg)!==M.spread)showSpread(pg);else{markPlaying();scrollToPlaying()}
+  const pg=M.data.vp[v];if(spreadOf(pg)!==M.spread)turnTo(pg);else{markPlaying();scrollToPlaying()}
 }
-async function openMushaf(on){
+async function openMushaf(on){if(!on&&typeof SEL!=="undefined"&&SEL.on)selEnd();
   if(on&&HZ.open)closeHifz();
   M.open=on;$("mushaf").hidden=!on;$("sx").hidden=!on;$("device").classList.toggle("mopen",on);
   syncVBtn();syncMushafBtn();$("mBtn").setAttribute("aria-pressed",String(on));$("mBtn").setAttribute("aria-label",on?"إخفاء المصحف":"عرض المصحف");
@@ -1477,12 +1885,12 @@ async function openMushaf(on){
   const v=curVerse();M.lastV=v;showSpread(v>=0?M.data.vp[v]:(store.get("mpage",1)||1));
 }
 const ICON_BOOK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3 5v13c4-.5 7 0 9 1.5 2-1.5 5-2 9-1.5V5c-4-.5-7 0-9 1.5zM12 8v9.3c-1.8-1-4.2-1.4-7-1.2V6.9c3-.2 5.3.3 7 1.1z"/></svg>';
-const SIDE=[["play","تشغيل / إيقاف","play"],["rep","تكرار","rep"],["next","الآية التالية","prev"],["prev","الآية السابقة","next"],
+const SIDE=[["play","تشغيل / إيقاف","play"],["rep","تكرار","rep"],["cnt","عدد التكرار","cnt"],["gap","السكوت بعد كل آية","gap"],["next","الآية التالية","prev"],["prev","الآية السابقة","next"],
   ["r0","القارئ 1","1"],["r1","القارئ 2","2"],["r2","القارئ 3","3"],["pgNext","الصفحة التالية","pgNext"],["pgPrev","الصفحة السابقة","pgPrev"]];
 function buildSide(){
   const P={pgNext:'<path d="M15 4L7 12l8 8 1.6-1.6L10.2 12l6.4-6.4z"/><rect x="3" y="4" width="2" height="16"/>',
            pgPrev:'<path d="M9 4l8 8-8 8-1.6-1.6L13.8 12 7.4 5.6z"/><rect x="19" y="4" width="2" height="16"/>'};
-  $("sx").innerHTML=SIDE.map(([f,label,icon])=>`<button class="sb${/^\d$/.test(icon)&&LOOK.ord?" ordw":""}" data-sf="${f}" id="s_${f}" aria-label="${label}">${/^\d$/.test(icon)?readerLabel(+icon-1):(P[icon]?`<svg viewBox="0 0 24 24" aria-hidden="true">${P[icon]}</svg>`:ico(icon))}</button>`).join("");
+  $("sx").innerHTML=SIDE.filter(x=>(x[0]!=="cnt"||BTNV.cnt!==false)&&(x[0]!=="gap"||BTNV.gap!==false)).map(([f,label,icon])=>`<button class="sb${/^\d$/.test(icon)&&LOOK.ord?" ordw":""}" data-sf="${f}" id="s_${f}" aria-label="${label}">${icon==="cnt"?'<b class="cn">×1</b>':/^\d$/.test(icon)?readerLabel(+icon-1):(P[icon]?`<svg viewBox="0 0 24 24" aria-hidden="true">${P[icon]}</svg>`:ico(icon))}${f==="rep"?'<i class="rpb"></i>':f==="gap"?'<em class="gpv"></em>':""}</button>`).join("");
   $("mBtn").innerHTML=ICON_BOOK+"<small>المصحف</small>";
 }
 buildSide();
@@ -1498,16 +1906,18 @@ function syncMushafBtn(){
   else{k.innerHTML='<span class="nm">أدعية<br>مختارة</span>';k.setAttribute("aria-label","أدعية مختارة")}
   fitNamesSoon();
 }
-$("mBtn").onclick=()=>openMushaf(!M.open);
+$("mBtn").onclick=()=>{if(typeof NV!=="undefined"&&NV.mode==="new")return;openMushaf(!M.open)};
 syncMushafBtn();
 $("sx").addEventListener("click",e=>{const b=e.target.closest("[data-sf]");if(!b)return;const f=b.dataset.sf;
   if(f==="play"){if(!S.surah&&M.data){const[s,a]=verseKey(firstVerseOf(M.spread));return start(s,a,{noBas:a!==1})}return togglePlay()}
   if(f==="rep")return cycleRep();
+  if(f==="cnt")return nvCount();
+  if(f==="gap")return cycleGap();
   if(f==="next")return stepAyah(1);
   if(f==="prev")return stepAyah(-1);
   if(f[0]==="r")return pickReciter(+f[1]);
-  if(f==="pgNext")return showSpread(M.spread+M.view);
-  if(f==="pgPrev")return showSpread(M.spread-M.view);
+  if(f==="pgNext")return turnTo(M.spread+M.view);
+  if(f==="pgPrev")return turnTo(M.spread-M.view);
 });
 const firstVerseOf=pg=>{const l=M.data.pages[pg-1].l.find(x=>x[0]==="t");return l?l[2][0][0]:0};
 /* touch an ayah to recite from it: long press (default), a light tap, or off — chosen in the settings */
@@ -1515,10 +1925,55 @@ const MT={mode:store.get("mTap","long"),t:0,x:0,y:0,v:-1,fired:false,armed:false
 /* the browser lets a page vibrate or start sound only after the user has really tapped it once */
 const wasActive=()=>NA()||!navigator.userActivation||navigator.userActivation.hasBeenActive;
 function jumpVerse(v){const[su,a]=verseKey(v);start(su,a,{noBas:a!==1})}
+/* ===== choosing ayat on the mushaf (1.76): tap the first ayah, tap the last, choose the count, «كرّر» ===== */
+var SEL={on:false,a:-1,b:-1,live:false};
+function selStart(){
+  if(NV.mode!=="new"&&!M.open)openMushaf(true);
+  SEL.on=true;SEL.live=false;SEL.a=SEL.b=-1;$("selBar").hidden=false;document.body.classList.add("selon");selDraw();document.querySelectorAll('[data-nv="ayat"]').forEach(k=>k.classList.add("on"));requestAnimationFrame(selFit);
+}
+function selFit(){const m=$("mushaf");m.style.top="";
+  if(SEL.on){const d=$("selBar").getBoundingClientRect().bottom+4-m.getBoundingClientRect().top;
+    if(d>0)m.style.top=(parseFloat(getComputedStyle(m).top)||0)+d+"px"}
+  if(M.open&&M.data)showSpread(M.spread)}
+addEventListener("resize",()=>{if(SEL.on)setTimeout(selFit,160)});
+function selEnd(){document.querySelectorAll('[data-nv="ayat"]').forEach(k=>k.classList.remove("on"));const was=SEL.on;SEL.on=false;SEL.a=SEL.b=-1;$("selBar").hidden=true;document.body.classList.remove("selon");if(was)selFit();else selMark()}
+function selMark(){const sp=$("spread");if(!sp)return;sp.querySelectorAll("span.sel,span.sela").forEach(x=>x.classList.remove("sel","sela"));
+  if(!SEL.on||SEL.a<0)return;const b=SEL.b<0?SEL.a:SEL.b;
+  sp.querySelectorAll("span[data-v]").forEach(x=>{const v=+x.dataset.v;if(v>=SEL.a&&v<=b)x.classList.add(v===SEL.a||v===b?"sela":"sel")})}
+function selDraw(){
+  const k=v=>verseKey(v),done=SEL.a>=0&&SEL.b>=0;
+  if(SEL.a<0)$("selMsg").textContent="اضغط آية البداية في المصحف";
+  else{const[s,a]=k(SEL.a);
+    if(!done)$("selMsg").textContent=`البداية: آية ${a} من ${NAMES[s-1]} — اضغط آية النهاية`;
+    else{const b=k(SEL.b)[1];$("selMsg").textContent=(SEL.live?"🔁 يتكرر الآن: ":"")+(a===b?`الآية ${a}`:`من آية ${a} إلى ${b}`)+` — ${NAMES[s-1]}`}}
+  $("selReps").innerHTML=RG_REPS.map(r=>`<button data-r="${r}" class="${r===PK.rep?"on":""}">${r===1?"مرة":r===0?"∞":"×"+r}</button>`).join("");
+  $("selGo").disabled=!done;
+  $("selGo").textContent=SEL.live?"✓ تم":"🔁 كرّر";
+  selMark()}
+function selTap(v){
+  if(SEL.a<0||SEL.b>=0){SEL.a=v;SEL.b=-1}           /* a new start (also after a finished choice) */
+  else{const[s1]=verseKey(SEL.a),[s2]=verseKey(v);
+    if(s1!==s2){flash("اختر آية النهاية من سورة "+NAMES[s1-1],2200);return}
+    if(v<SEL.a){SEL.b=SEL.a;SEL.a=v}else SEL.b=v}
+  try{if(!NA()&&navigator.vibrate&&wasActive())navigator.vibrate(15)}catch(e){}
+  if(SEL.b>=0)return selApply();   /* start and end chosen: the repetition starts at once, only on these ayat */
+  selDraw()}
+function selApply(){const[s,a]=verseKey(SEL.a),b=verseKey(SEL.b)[1];playRange(s,a,b,PK.rep);SEL.live=true;selDraw();render()}
+$("selReps").addEventListener("click",e=>{const b=e.target.closest("button[data-r]");if(!b)return;PK.rep=+b.dataset.r;store.set("rangeRep",PK.rep);
+  if(SEL.live&&SEL.b>=0){const[s,a]=verseKey(SEL.a),z=verseKey(SEL.b)[1];   /* a new count applies to the ayat now repeating */
+    if(S.hifz&&S.hifz.c!=null)S.hifz.c=PK.rep;else if(S.surah===s){S.hifz={s,a,b:z,n:1,c:PK.rep};S.to=0}
+    flash(PK.rep===0?"تكرار بلا توقف":"التكرار: "+timesTxt(PK.rep),1500);render()}
+  selDraw()});
+/* «إلغاء»: the ayat chosen here stop repeating */
+$("selX").onclick=()=>{if(SEL.live&&S.hifz&&S.hifz.c!=null){S.hifz=null;stopAll()}selEnd()};
+$("selGo").onclick=()=>{if(SEL.a<0||SEL.b<0)return;if(!SEL.live)selApply();selEnd()};
+$("selNum").onclick=()=>{let s=0,a=0,b=0;if(SEL.a>=0){[s,a]=verseKey(SEL.a);b=SEL.b>=0?verseKey(SEL.b)[1]:a}
+  else if(M.data&&M.spread){const v=firstVerseOf(M.spread);if(v||v===0)s=verseKey(v)[0]}
+  selEnd();openPick(s||0);if(a){PK.a=a;PK.b=b;PK.w="a";drawPick()}};
 function mtMark(v){$("spread").querySelectorAll("span.lp").forEach(x=>x.classList.remove("lp"));
   if(v>=0)$("spread").querySelectorAll(`span[data-v="${v}"]`).forEach(x=>x.classList.add("lp"))}
 function mtCancel(){clearTimeout(MT.t);MT.t=0;MT.armed=false;mtMark(-1)}
-$("spread").addEventListener("pointerdown",e=>{mtCancel();if(MT.mode!=="long"||e.button>0)return;const s=e.target.closest("span[data-v]");if(!s)return;
+$("spread").addEventListener("pointerdown",e=>{mtCancel();if(SEL.on||MT.mode!=="long"||e.button>0)return;const s=e.target.closest("span[data-v]");if(!s)return;
   MT.fired=false;MT.x=e.clientX;MT.y=e.clientY;MT.v=+s.dataset.v;mtMark(MT.v);
   MT.t=setTimeout(()=>{MT.t=0;MT.fired=true;
     if(!wasActive()){MT.armed=true;return}   /* first touch of the page: start when the finger is lifted */
@@ -1529,13 +1984,67 @@ $("spread").addEventListener("pointerup",()=>{if(MT.armed){MT.armed=false;mtMark
 $("spread").addEventListener("contextmenu",e=>e.preventDefault());
 $("spread").addEventListener("click",e=>{if(MT.fired){MT.fired=false;return}
   const s=e.target.closest("span[data-v]");if(!s||mSwiped)return;
+  if(SEL.on)return selTap(+s.dataset.v);
   if(MT.mode==="tap")return jumpVerse(+s.dataset.v);
   if(MT.mode==="long"&&Date.now()-MT.hint>15000){MT.hint=Date.now();flash("اضغط مطوّلاً على الآية لتبدأ التلاوة منها",2200)}});
-/* swipe to turn pages */
+/* ===== turning pages (1.69, the effect of the reader app 1.76) =====
+   «تقليب جانبي»: the page follows the finger and the next one slides in beside it, like turning a real page;
+   past a fifth of the width (or a quick flick) it turns, otherwise it goes back. «فوري»: the page just changes. */
+const PT={mode:store.get("pturn","slide"),auto:store.get("pturnAuto",true),speed:store.get("pturnSpeed","n")};
+const ptDur=()=>({f:170,n:240,s:380}[PT.speed]||240);
+var FL={};
+function flipOff(){return $("mushaf").clientWidth+12}   /* the leaving spread goes fully out, a narrow gap between the two */
+function flipPeek(d){
+  const first=clampSpread(M.spread+d*M.view);if(first===M.spread)return false;
+  const sp=buildSpread(first),w=document.createElement("div");
+  w.className=$("spread").className;w.style.cssText=`pointer-events:none;will-change:transform;transform:translate3d(${-d*flipOff()}px,0,0)`;
+  w.append(...sp.els);$("mushaf").appendChild(w);FL.wrap=w;FL.sp=sp;
+  (async()=>{await Promise.all([addFace("QAMIRI",["f/AMIRI.woff2"]).catch(()=>{}),addFace("QBSML",["f/BSML.ttf"]).catch(()=>{})]);
+    for(const[i,p]of sp.pages.entries()){try{await pageFont(p)}catch(e){}const el=sp.els[i];
+      if(el.isConnected&&el.classList.contains("loading")){fitPage(el,p);el.classList.remove("loading")}}})();
+  return true}
+function flipDrag(dx){
+  if(FL.tm)flipDone();
+  const d=dx>0?1:-1;   /* to the right = the next page (it comes from the left, as in a printed mushaf) */
+  if(FL.d!==d&&(FL.d===undefined||Math.abs(dx)>4)){if(FL.wrap)FL.wrap.remove();FL={d};flipPeek(d);$("spread").style.willChange="transform"}
+  const x=FL.wrap?dx:dx*.25;   /* at the first and the last page it only gives a little */
+  $("spread").style.transition="";$("spread").style.transform=`translate3d(${x}px,0,0)`;
+  if(FL.wrap){FL.wrap.style.transition="";FL.wrap.style.transform=`translate3d(${x-FL.d*flipOff()}px,0,0)`}}
+function flipEnd(ok){
+  const O=flipOff(),d=FL.d||1,dur=ok?ptDur():Math.round(ptDur()*.85),tr=`transform ${dur}ms cubic-bezier(.22,.75,.3,1)`;
+  $("spread").style.transition=tr;$("spread").style.transform=ok?`translate3d(${d*O}px,0,0)`:"translate3d(0,0,0)";
+  if(FL.wrap){FL.wrap.style.transition=tr;FL.wrap.style.transform=ok?"translate3d(0,0,0)":`translate3d(${-d*O}px,0,0)`}
+  FL.ok=ok;clearTimeout(FL.tm);FL.tm=setTimeout(flipDone,dur+20)}
+function flipDone(){
+  clearTimeout(FL.tm);const f=FL;FL={};const b=$("spread");
+  b.style.transition="";b.style.transform="";b.style.willChange="";
+  if(f.ok&&f.sp){showSpread(f.sp.first,f.sp);if(f.wrap)f.wrap.remove()}
+  else if(f.wrap)f.wrap.remove()}
+function flipReset(){if(!FL)return;if(FL.wrap||FL.tm||$("spread").style.transform){clearTimeout(FL.tm);if(FL.wrap)FL.wrap.remove();FL={};
+  const b=$("spread");b.style.transition="";b.style.transform="";b.style.willChange=""}}
+/* a page turned by the recitation or by a key: slide it in too (when chosen in the settings) */
+function turnTo(pg){
+  if(!M.open||!M.data)return showSpread(pg);
+  if(mx0&&mx0.h){M.lastV=-2;return}   /* the reader is turning a page by hand: try again after */
+  const first=clampSpread(pg),d=first===M.spread+M.view||(M.view===2&&first===M.spread+1)?1:first===M.spread-M.view?-1:0;
+  if(PT.mode!=="slide"||!PT.auto||!d||document.hidden)return showSpread(pg);
+  flipReset();FL={d};if(!flipPeek(d)){FL={};return showSpread(pg)}
+  requestAnimationFrame(()=>requestAnimationFrame(()=>flipEnd(true)))}
 let mx0=null,mSwiped=false;
-$("spread").addEventListener("pointerdown",e=>{mx0={x:e.clientX,y:e.clientY,t:Date.now()};mSwiped=false});
-$("spread").addEventListener("pointerup",e=>{if(!mx0)return;const dx=e.clientX-mx0.x,dy=e.clientY-mx0.y;
-  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5&&Date.now()-mx0.t<700){mSwiped=true;showSpread(M.spread+(dx>0?M.view:-M.view));setTimeout(()=>mSwiped=false,50)}mx0=null});
+$("spread").addEventListener("pointerdown",e=>{if(FL.tm)flipDone();mx0={x:e.clientX,y:e.clientY,t:Date.now(),h:null,id:e.pointerId};mSwiped=false});
+$("spread").addEventListener("pointermove",e=>{if(!mx0||PT.mode!=="slide"||e.pointerId!==mx0.id)return;
+  const dx=e.clientX-mx0.x,dy=e.clientY-mx0.y;
+  if(mx0.h===null){if(Math.abs(dx)<9&&Math.abs(dy)<9)return;mx0.h=Math.abs(dx)>Math.abs(dy)*1.15&&!MT.fired;
+    if(mx0.h){mSwiped=true;try{$("spread").setPointerCapture(e.pointerId)}catch(err){}}}
+  if(mx0.h){mx0.lx=dx;flipDrag(dx)}});
+$("spread").addEventListener("pointerup",e=>{if(!mx0)return;const dx=e.clientX-mx0.x,dy=e.clientY-mx0.y,dt=Math.max(1,Date.now()-mx0.t);
+  if(PT.mode==="slide"){
+    if(mx0.h){const W=$("mushaf").clientWidth,fast=Math.abs(dx)>28&&Math.abs(dx)/dt>.35;
+      flipEnd(!!FL.wrap&&Math.sign(dx)===FL.d&&(Math.abs(dx)>W*.22||fast));setTimeout(()=>mSwiped=false,50)}
+    else if(FL.wrap)flipEnd(false)}
+  else if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5&&dt<700){mSwiped=true;showSpread(M.spread+(dx>0?M.view:-M.view));setTimeout(()=>mSwiped=false,50)}
+  mx0=null});
+$("spread").addEventListener("pointercancel",()=>{if(FL.wrap&&!FL.tm)flipEnd(false);mx0=null});
 addEventListener("resize",()=>{if(M.open&&M.data)showSpread(M.spread)});
 
 /* ===== memorization: Juz Amma (النبأ to الناس) in groups of three ayat ===== */
@@ -1543,6 +2052,7 @@ var HZ={on:store.get("hifzOn",false),s:78,open:false,size:store.get("hifzSize",3
   keysOn:store.get("hzKeys",true),lockOn:store.get("hzLock",true),voice:store.get("hzVoice",true),breakOn:store.get("hzBreak",true),lock:0};
 /* «تكرار» / «تكرار الآيات» while a segment repeats: stop repeating, pause, and let a new count be chosen */
 function breakHifz(force){
+  if(S.hifz&&S.hifz.c!=null){if(typeof SEL!=="undefined"&&SEL.on)selEnd();stopAll();flash("أُلغي تكرار الآيات المحددة وأُوقفت التلاوة",2200);return true}
   if(!((force||HZ.breakOn)&&S.hifz))return false;
   stopPrompt();S.hifz=null;HZ.lock=0;if(S.st==="playing"||S.st==="loading")pause();
   if(HZ.keysOn){if(!HZ.open)openHifz();else drawRailHifz()}
@@ -1576,8 +2086,8 @@ function drawHifzNow(){
   $("hzr").querySelectorAll(".sb.hz").forEach(b=>b.classList.toggle("on",!!z&&z.s===HZ.s&&+b.dataset.a===z.a));
   if($("hifz").hidden)return;
   $("hzGrid").querySelectorAll(".hzbtn").forEach(b=>{const on=!!z&&z.s===HZ.s&&+b.dataset.a===z.a;b.classList.toggle("on",on);
-    b.querySelector("small").textContent=on?`تتكرر · المرة ${z.n}${REPC.seg?" من "+REPC.seg:""}`:(b.dataset.a===b.dataset.b?"آية":"الآيات")});
-  $("hzNow").textContent=z?`سورة ${NAMES[z.s-1]}: ${z.a===z.b?"الآية "+z.a:"الآيات "+z.a+" إلى "+z.b} — المرة ${z.n}${REPC.seg?" من "+REPC.seg:""}`:"اختر مجموعة الآيات لتتكرر بلا توقف";
+    b.querySelector("small").textContent=on?`تتكرر · المرة ${z.n}${hzLim()?" من "+hzLim():""}`:(b.dataset.a===b.dataset.b?"آية":"الآيات")});
+  $("hzNow").textContent=z?`سورة ${NAMES[z.s-1]}: ${z.a===z.b?"الآية "+z.a:"الآيات "+z.a+" إلى "+z.b} — المرة ${z.n}${hzLim()?" من "+hzLim():""}`:"اختر مجموعة الآيات لتتكرر بلا توقف";
 }
 /* حفظ: pick a surah, press حفظ → its groups appear in the right margin under the mushaf button */
 function openHifz(){
@@ -1616,7 +2126,7 @@ function startHifz(s,a,b){
   start(s,a,{noBas:true});S.to=0;S.hifz={s,a,b,n:1};render();drawHifzNow();
 }
 $("hzClose").onclick=closeHifz;
-$("hzStop").onclick=()=>{stopAll();drawHifzNow()};
+$("hzStop").onclick=()=>{stopKey();drawHifzNow()};
 $("hzPrev").onclick=()=>{if(HZ.s>78){HZ.s--;drawHifz();$("hzGrid").scrollTop=0}};
 $("hzNext").onclick=()=>{if(HZ.s<114){HZ.s++;drawHifz();$("hzGrid").scrollTop=0}};
 /* choose how many ayat repeat: say it, lock the other counts, repeat the segment holding the current ayah */
@@ -1713,38 +2223,87 @@ $("ratePrev").onclick=async()=>{
   preview.play().then(syncRate).catch(()=>{stopPreview();$("rateHint").textContent="تعذّر تشغيل المعاينة، تحقق من الإنترنت"});
 };
 /* ---- optional looks: on by default, can be turned off (or all reset to the original look) ---- */
-function applyLook(){document.body.classList.toggle("redplay",LOOK.red);document.body.classList.toggle("tint",LOOK.tint);
+function applyLook(){document.body.classList.toggle("bmod",LOOK.bstyle!=="gloss");document.body.classList.toggle("redplay",LOOK.red);document.body.classList.toggle("tint",LOOK.tint);
   ["black","red"].forEach(c=>document.body.classList.toggle("stop-"+c,LOOK.stopColor===c));
   ["green","gold","purple","orange","red"].forEach(c=>document.body.classList.toggle("hz-"+c,LOOK.hzColor===c))}
 function setLook(k,v){LOOK[k]=v;store.set("look2",LOOK);applyLook();$("redOn").checked=LOOK.red;$("tintOn").checked=LOOK.tint;$("fastOn").checked=LOOK.fast}
 $("redOn").addEventListener("change",e=>setLook("red",e.target.checked));
 $("tintOn").addEventListener("change",e=>setLook("tint",e.target.checked));
+$("scPal").addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(!b)return;SCB=b.dataset.c;store.set("scBrush",SCB);scDraw()});
+/* a surah in the list: paint it with the chosen colour; pressed again (or with «بلا لون») its colour goes */
+$("scGrid").addEventListener("click",e=>{const b=e.target.closest("button[data-s]");if(!b)return;const n=+b.dataset.s,top=$("scGrid").scrollTop;
+  if(!SCB||SCOL[n]===SCB)delete SCOL[n];else SCOL[n]=SCB;store.set("scolors",SCOL);applySC();
+  const c=SCOL[n];if(c)b.dataset.c=c;else b.removeAttribute("data-c");$("scGrid").scrollTop=top});
+$("scAll").onclick=()=>{scPaint(NAMES.map((_,i)=>i+1));flash(SCB?"كل السور: "+SC_COLORS[SCB][3]:"أُزيل لون كل السور",1500)};
+$("scAmma").onclick=()=>{const l=[];for(let i=78;i<=114;i++)l.push(i);scPaint(l);flash(SCB?"جزء عمّ: "+SC_COLORS[SCB][3]:"أُزيل لون جزء عمّ",1500)};
+$("scOld").addEventListener("change",e=>{SCV.old=e.target.checked;store.set("scolOld",SCV.old);applySC()});
+$("scNew").addEventListener("change",e=>{SCV.nw=e.target.checked;store.set("scolNew",SCV.nw);applySC()});
+$("scDef").onclick=()=>{SCOL=scDefault();scSave();flash("ألوان البقرة وجزء عمّ",1500)};
+$("scClear").onclick=()=>{SCOL={};scSave();flash("أُزيلت كل الألوان",1500)};
+applySC();scDraw();
+$("kcPal").addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(!b)return;KCB=b.dataset.c;store.set("kcBrush",KCB);kcDraw()});
+$("kcGrid").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(!b)return;const k=b.dataset.k;
+  if(!KCB||KCOL[k]===KCB)delete KCOL[k];else KCOL[k]=KCB;kcSave();if(!KCV)flash("ألوان المفاتيح مخفية — فعّل «إظهار ألوان المفاتيح»",2200)});
+$("kcSug").onclick=()=>{KCOL=Object.assign({},KC_SUGGEST);KCV=true;store.set("kcOn",true);kcSave();flash("ألوان مقترحة: تشغيل أخضر، إيقاف أحمر، تكرار برتقالي، العدد بنفسجي، سكوت فيروزي",2800)};
+$("kcAll").onclick=()=>{if(KCB)KC_KEYS.forEach(([k])=>KCOL[k]=KCB);else KCOL={};kcSave()};
+$("kcClear").onclick=()=>{KCOL={};kcSave();flash("رجعت المفاتيح لألوانها الأصلية",1600)};
+$("kcOn").addEventListener("change",e=>{KCV=e.target.checked;store.set("kcOn",KCV);applyKC()});
+applyKC();kcDraw();
 $("fastOn").addEventListener("change",e=>setLook("fast",e.target.checked));
 const FONTS=["tajawal","naskh","cairo","almarai","amiri"];
 function setFont(f){if(FONTS.indexOf(f)<0)f="tajawal";document.documentElement.setAttribute("data-font",f);store.set("font",f);$("fontSel").value=f;
   const go=()=>{fitUnit();fitNamesSoon();if(typeof rebuildCtrl==="function")try{render()}catch(e){}};go();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(go);setTimeout(go,400)}
 $("fontSel").value=FONTS.indexOf(store.get("font","tajawal"))<0?"tajawal":store.get("font","tajawal");
 $("fontSel").addEventListener("change",e=>setFont(e.target.value));
-$("lookReset").onclick=()=>{setLook("red",false);setLook("tint",false);setLook("stopColor","black");$("stopColor").value="black";setFont("tajawal")};
+$("bstyleSel").value=LOOK.bstyle==="gloss"?"gloss":"mod";
+$("bstyleSel").addEventListener("change",e=>{setLook("bstyle",e.target.value);fitUnit()});
+$("lookReset").onclick=()=>{setLook("bstyle","mod");$("bstyleSel").value="mod";setLook("red",false);setLook("tint",false);setLook("stopColor","black");$("stopColor").value="black";setFont("tajawal")};
 $("stopColor").addEventListener("change",e=>setLook("stopColor",e.target.value));
 function setBtnV(k,v){BTNV[k]=v;store.set("btnv",BTNV);rebuildCtrl()}
 $("stopOn").addEventListener("change",e=>setBtnV("stop",e.target.checked));
 $("surahNavOn").addEventListener("change",e=>setBtnV("surahNav",e.target.checked));
+$("ctrlOrderSel").value=CTRL_ORDER;
+$("ctrlOrderSel").addEventListener("change",e=>{CTRL_ORDER=e.target.value;store.set("ctrlOrder",CTRL_ORDER);rebuildCtrl();flash(CTRL_ORDER==="old"?"عاد الترتيب السابق للمفاتيح":"ترتيب المفاتيح حسب الوظيفة",1800)});
+$("gapOn").addEventListener("change",e=>{setBtnV("gap",e.target.checked);if(typeof buildSide==="function"){buildSide();if(M.open)openMushaf(true)}render()});
+$("cntOn").addEventListener("change",e=>{setBtnV("cnt",e.target.checked);if(typeof buildSide==="function"){buildSide();if(M.open)openMushaf(true);render()}});
 /* safety net: bring every hidden control button back in one tap */
-$("showAllBtns").onclick=()=>{BTNV.stop=true;BTNV.surahNav=true;store.set("btnv",BTNV);S.rangeOn=true;store.set("rangeOn",true);
+$("showAllBtns").onclick=()=>{BTNV.stop=true;BTNV.surahNav=true;BTNV.cnt=true;BTNV.gap=true;$("cntOn").checked=$("gapOn").checked=true;if(typeof buildSide==="function")buildSide();store.set("btnv",BTNV);S.rangeOn=true;store.set("rangeOn",true);
   $("stopOn").checked=$("surahNavOn").checked=$("rangeOn").checked=true;rebuildCtrl();flash("ظهرت كل المفاتيح",2000)};
 /* fast response: a device button acts the moment it is touched; the click that follows is ignored */
-const FAST_SEL=".key,.btn,.sb:not(.hz),.gear,.home";
+const FAST_SEL=".key,.btn,.sb:not(.hz),.gear,.home,#nvBar button,#nvPlay button,#selBar button,#nvLg button";
+/* «لمس سهل» (1.86): screens under a protector register a firm press late or as a small slide, and the press was lost.
+   With it the key acts the moment it is touched (as «استجابة سريعة»), and the tip waits for a longer press. */
+var TOUCH={easy:store.get("touchEasy",false)};
+const fastOn=()=>LOOK.fast||TOUCH.easy;
+const slop=()=>typeof TOUCH!=="undefined"&&TOUCH.easy?36:14;   /* how far a finger may wander and still be a press */
+/* a key inside a list that scrolls (the surah keys on a phone) must not act on touch: the finger may be starting a scroll */
+function scroller(b){for(let n=b.parentElement;n&&n!==document.body;n=n.parentElement){const o=getComputedStyle(n).overflowY;
+  if((o==="auto"||o==="scroll")&&n.scrollHeight>n.clientHeight+2)return n}return null}
+const ezAtOnce=b=>!fastSkip(b)&&!b.closest("#nvLg")&&!(TOUCH.easy&&!LOOK.fast&&scroller(b));
+const fastSkip=t=>t.matches('.key.mus,#mBtn,'+REP_SEL+',[data-nv="rep"],[data-nv^="r"]');   /* keys with a long-press job wait for release */
 document.addEventListener("pointerdown",e=>{
-  if(!LOOK.fast||e.button>0)return;document.querySelectorAll(FAST_SEL).forEach(x=>{x._fastT=0});const b=e.target.closest(FAST_SEL);
-  if(!b||b.hidden||b.matches(".key.mus,#mBtn")||b.getAttribute("aria-disabled")==="true"||b.closest(".spread,.sheet"))return;   /* the mushaf keys wait for release: a long press on them switches the mushaf */
-  b._fastT=Date.now();b.classList.add("press");setTimeout(()=>b.classList.remove("press"),140);b.click();
+  if(!fastOn()||e.button>0)return;document.querySelectorAll(FAST_SEL).forEach(x=>{x._fastT=0});const b=e.target.closest(FAST_SEL);
+  if(!b||b.hidden||b.disabled||!ezAtOnce(b)||b.getAttribute("aria-disabled")==="true"||b.closest(".spread,.sheet"))return;   /* the mushaf keys wait for release: a long press on them switches the mushaf */
+  e._acted=1;b._fastT=Date.now();b.classList.add("press");setTimeout(()=>b.classList.remove("press"),140);b.click();
 },true);
+var EZ={b:null},ezLast=0;
+document.addEventListener("pointerdown",e=>{EZ={b:null};if(!TOUCH.easy||e.button>0||e._acted)return;const b=e.target.closest(FAST_SEL);
+  if(!b||b.hidden||b.disabled||b.closest(".spread,.sheet"))return;const sc=scroller(b);
+  EZ={b,x:e.clientX,y:e.clientY,lx:e.clientX,ly:e.clientY,t:Date.now(),sc,st:sc?sc.scrollTop:0}},true);
+document.addEventListener("pointermove",e=>{if(EZ.b){EZ.lx=e.clientX;EZ.ly=e.clientY}},true);
+function ezRelease(e){const z=EZ;EZ={b:null};if(!z.b)return;
+  if(Date.now()-z.t>=longMs()-60||(typeof TIP!=="undefined"&&TIP.shown))return;   /* a long press: its own job, or the tip */
+  if(Math.abs(z.lx-z.x)+Math.abs(z.ly-z.y)>slop())return;
+  const act=()=>{if(z.sc&&Math.abs(z.sc.scrollTop-z.st)>4)return;   /* the list scrolled: it was a scroll, not a press */
+    ezLast=z.b._ezT=Date.now();z.b.classList.add("press");setTimeout(()=>z.b.classList.remove("press"),140);z.b.click()};
+  if(e.type==="pointercancel")setTimeout(act,80);else act()}
+["pointerup","pointercancel"].forEach(t=>document.addEventListener(t,ezRelease,true));
+document.addEventListener("click",e=>{if(!e.isTrusted||!ezLast)return;
+  if(Date.now()-ezLast<700){ezLast=0;e.stopPropagation();e.preventDefault()}else ezLast=0},true);   /* the click of a press that already acted on release — wherever it lands (a list may have closed under the finger) */
 /* one touch = one action: old WebViews can deliver a touch twice, and after a fast touch the click lands on
    whatever just opened under the finger (that is how settings or حفظ could open and close at once) */
 let lastFast=0,lastTap={el:null,t:0};
-document.addEventListener("pointerdown",e=>{const t=e.target.closest(FAST_SEL);
-  lastFast=LOOK.fast&&t&&!t.hidden&&!t.matches(".key.mus,#mBtn")&&t.getAttribute("aria-disabled")!=="true"&&!e.target.closest(".spread,.sheet")?Date.now():0},true);
+document.addEventListener("pointerdown",e=>{lastFast=e._acted?Date.now():0},true);
 document.addEventListener("click",e=>{
   if(!e.isTrusted)return;
   if(lastFast&&Date.now()-lastFast<1200){lastFast=0;e.stopPropagation();e.preventDefault();return}   /* the click of the touch that already acted */
@@ -1753,13 +2312,13 @@ document.addEventListener("click",e=>{
 },true);
 document.addEventListener("click",e=>{
   if(!e.isTrusted)return;const b=e.target.closest(FAST_SEL);
-  if(b&&b._fastT&&LOOK.fast&&Date.now()-b._fastT<1000){b._fastT=0;e.stopPropagation();e.preventDefault()}
+  if(b&&b._fastT&&fastOn()&&Date.now()-b._fastT<1000){b._fastT=0;e.stopPropagation();e.preventDefault()}
   else if(b)b._fastT=0;
 },true);
 $("scrollOn").addEventListener("change",e=>{SCROLLKEYS=e.target.checked;store.set("scrollKeys",SCROLLKEYS);
   setOrientation(PORTRAIT,isPhone());$("panel").scrollTop=0;fitUnit();setTimeout(fitUnit,100)});
 $("mfullOn").addEventListener("change",e=>{setLook("mfull",e.target.checked);if(M.open&&M.data)showSpread(M.spread)});
-$("medSel").addEventListener("change",e=>setEdition(+e.target.value===1?1:2));
+$("medSel").addEventListener("change",e=>setEdition([1,2,4].includes(+e.target.value)?+e.target.value:2));
 $("mushafOn").addEventListener("change",e=>{M.btnOn=e.target.checked;store.set("mushafOn",M.btnOn);if(!M.btnOn&&M.open)openMushaf(false);syncMushafBtn()});
 $("hifzOn").addEventListener("change",e=>{HZ.on=e.target.checked;store.set("hifzOn",HZ.on);if(!HZ.on){if(S.hifz)breakHifz(true);closeHifz()}setOrientation(PORTRAIT,PHONE);fitUnit();syncHifzBtn()});
 $("hifzSize").addEventListener("change",e=>{HZ.size=+e.target.value;store.set("hifzSize",HZ.size);if(HZ.open)drawRailHifz()});
@@ -1937,7 +2496,7 @@ const GUIDE=[
  ["readers","القراء 1 و2 و3",`<ul><li>ثلاثة قراء تختارهم أنت، و<b>الضغط على المفتاح</b> ينقل التلاوة إلى صوته.</li><li><b>اضغط مطوّلًا</b> على مفتاح القارئ لتفتح الإعدادات وتختار القراء.</li><li>زر <b>«استمع للقراء واختر»</b> يُسمعك كل قارئ قبل اختياره.</li></ul>`],
  ["hifz","تكرار الآيات للحفظ",`<ul><li>فعّل مفتاح <b>«تكرار الآيات»</b> من تبويب <b>التكرار</b>.</li><li>اختر سورة ثم اضغط <b>تكرار الآيات</b>، فتُقسَّم السورة إلى مقاطع تظهر في الهامش.</li><li>كل مقطع <b>يتكرر بلا توقف</b> (أو عدداً محدداً من المرات تختاره من الإعدادات) حتى تنتقل إلى غيره، واختر عدد آيات المقطع من 1 إلى 5.</li></ul>`],
  ["mushaf","المصحف مع التلاوة",`<ul><li>فعّل مفتاح <b>«المصحف»</b> مكان «أدعية مختارة»، واضغطه لفتح المصحف.</li><li>تُظلَّل <b>الآية المقروءة</b> وتتقلّب الصفحات مع القارئ.</li><li><b>اضغط مطوّلًا على أي آية</b> لتبدأ التلاوة منها (ويمكن جعله ضغطاً خفيفاً أو تعطيله من الإعدادات)، و<b>اسحب</b> لتقليب الصفحات.</li><li>زر <b>وجه / وجهان</b> لعرض صفحة أو صفحتين.</li></ul>`],
- ["eds","مصحفان من مجمع الملك فهد",`<ul><li><b>طبعة 1421</b> (الصورة الأولى) و<b>طبعة 1405</b> (الصورة الثانية): حروفها أعرض وأثقل وأرقام آياتها أوضح.</li><li><b>اضغط مطوّلًا</b> على مفتاح «المصحف» للتبديل بينهما، أو اختر من الإعدادات.</li><li>المصحف <b>يملأ الشاشة</b>، ويمكن إرجاعه إلى شكل الصفحة المطبوعة من الإعدادات.</li></ul>`],
+ ["eds","مصاحف من مجمع الملك فهد",`<ul><li><b>طبعة 1423</b> (الصورة الأولى) و<b>طبعة 1405</b> (الصورة الثانية): حروفها أعرض وأثقل وأرقام آياتها أوضح.</li><li>و<b>طبعة 1423 بألوان التجويد (V4)</b>: الصفحات نفسها مع تلوين أحكام التجويد.</li><li><b>اضغط مطوّلًا</b> على مفتاح «المصحف» للتنقل بينها، أو اختر من الإعدادات.</li><li>المصحف <b>يملأ الشاشة</b>، ويمكن إرجاعه إلى شكل الصفحة المطبوعة من الإعدادات.</li></ul>`],
  ["rec","سرعة التلاوة والسكوت بعد الآية",`<ul><li>من تبويب <b>التلاوة</b>: اجعل التلاوة <b>أبطأ أو أسرع</b>، واستمع إلى معاينة قبل الاعتماد.</li><li><b>السكوت بعد كل آية</b>: ربع مدة الآية أو نصفها أو ثلاثة أرباعها أو مثلها، لتردّد الآية بعد القارئ.</li><li>ويمكن أن يُقرأ <b>اسم السورة</b> قبل تلاوتها.</li></ul>`],
  ["dl","الاستماع والقراءة بدون إنترنت",`<ul><li>من زر <b>التنزيل</b> ⬇ اختر القارئ والسور ثم اضغط <b>تنزيل</b>.</li><li>ومن الأعلى نزّل <b>المصحف كاملًا</b> بأيّ الطبعتين.</li><li>ما نزّلته يعمل <b>بدون إنترنت</b>.</li></ul>`],
  ["set","الإعدادات والمساعدة",`<ul><li>تبويبات الإعدادات: <b>التلاوة</b> و<b>التكرار</b> و<b>المصحف</b> و<b>المفاتيح</b> و<b>المظهر</b> و<b>النسخ الاحتياطي</b> و<b>مساعدة</b>.</li><li>إن اختفى مفتاح تحتاجه: <b>المفاتيح</b> ← <b>إظهار كل المفاتيح المخفية</b>.</li><li>هذا الدليل تجده متى احتجته في تبويب <b>مساعدة</b>.</li></ul>`]];
@@ -1960,9 +2519,143 @@ $("gdOpen").onclick=openGuide;
 {const hb=window.handleBack;window.handleBack=()=>{if(!$("gd").hidden){closeGuide();return 1}return hb?hb():0}}
 if(!store.get("guideSeen",false))setTimeout(openGuide,500);
 
+
+/* ===== the new view (1.63): the mushaf fills the screen, a bar of keys below it =====
+   The same mushaf element is moved between the device (old view) and this layer, so everything it does
+   (follow the recitation, long press on an ayah, turning pages) works in both. */
+var NV={mode:store.get("viewMode","old"),pages:store.get("nvPages","auto"),status:store.get("nvStatus",true),labels:store.get("nvLabels",false),
+  big:store.get("nvBig",false),surahPlay:store.get("nvSurahPlay",false),player:false,pickS:0,cntMax:store.get("nvCntMax",5)};
+function nvPagesFix(){if(NV&&NV.mode==="new"&&NV.pages!=="auto")M.view=+NV.pages}
+function nvOn(){return !!NV&&NV.mode==="new"}
+function nvApply(){
+  const on=nvOn(),b=document.body;b.classList.toggle("vnew",on);$("nv").hidden=!on;
+  b.classList.toggle("nvnolab",!NV.labels);b.classList.toggle("nvbig",NV.big);$("nvTop").hidden=!NV.status;
+}
+function enterView(first){
+  const on=nvOn(),mu=$("mushaf");nvApply();
+  if(on){if(HZ.open)closeHifz();if(mu.parentElement!==$("nvM"))$("nvM").appendChild(mu);
+    M.view=store.get(PORTRAIT?"mview_p":"mview",PORTRAIT?1:2);nvPagesFix();
+    requestAnimationFrame(()=>openMushaf(true))}
+  else{if(mu.parentElement!==$("device"))$("device").insertBefore(mu,$("home"));$("nvList").hidden=true;NV.player=false;
+    M.view=store.get(PORTRAIT?"mview_p":"mview",PORTRAIT?1:2);if(!first)openMushaf(false);fitUnit()}
+  render();
+}
+function setViewMode(m){NV.mode=m==="new"?"new":"old";store.set("viewMode",NV.mode);$("viewSel").value=NV.mode;enterView();
+  flash(nvOn()?"العرض الجديد: المصحف مع شريط الأزرار":"العرض القديم: لوحة السور والمفاتيح",2200)}
+function nvPlaying(){return S.st==="playing"||S.st==="loading"}
+function nvRender(){
+  if(!nvOn())return;
+  let t;
+  if(S.msg)t=`<span>${S.msg}</span>`;
+  else if(S.surah&&S.duas<0){const pos=S.gapOn?"سكوت…":S.phase==="name"?"اسم السورة":S.phase==="bas"?"البسملة":"آية "+S.ayah;
+    t=`<b>${reciter().short||reciter().name}</b><span>سورة ${NAMES[S.surah-1]}</span><span>${pos}</span>`+
+      (S.repeat?`<span class="nvtag">🔁 ${S.repeat===2?"السورة":"الآية"+(REPC.ayah?" "+S.repN+"/"+REPC.ayah:"")}</span>`:"")+(S.st==="loading"?"<span>جارٍ التحميل…</span>":"")}
+  else t=`<b>${reciter().short||reciter().name}</b><span>${NV.pickS?"سورة "+NAMES[NV.pickS-1]+" — اضغط «استماع»":"اضغط «استماع» أو اختر سورة"}</span>`;
+  $("nvInfo").innerHTML=t;
+  $("nvPg").textContent="الإصدار "+APP_VERSION;
+  const active=nvPlaying()||S.st==="paused";
+  /* one row only: while listening the sound keys stand in place of the keys, and the keys come back when it stops */
+  $("nvPlay").hidden=!active;$("nvBar").hidden=active;
+  $("nvListen").classList.toggle("lit",nvPlaying());
+  $("nvRep").classList.toggle("lit",S.repeat>0);$("nvRep").querySelector("small").textContent=repName();
+  {const c=nvCntNow(),k=$("nvCnt");k.querySelector("b").textContent=c===0?"∞":"×"+c;k.classList.toggle("lit",c!==1);
+    k.setAttribute("aria-label","عدد التكرار: "+(c===0?"بلا توقف":timesTxt(c)))}
+  const P=$("nvPause"),paused=S.st==="paused";
+  P.querySelector("svg").innerHTML=paused?'<path d="M7 5v14l11-7z"/>':'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+  P.querySelector("small").textContent=paused?"استمرار":"مؤقت";P.setAttribute("aria-label",paused?"استمرار":"إيقاف مؤقت");
+  P.classList.toggle("dim",!active);
+  [0,1,2].forEach(i=>{const r=RECITERS.find(x=>x.id===S.slots[i]);
+    $("nv").querySelectorAll(`.nvr[data-nv="r${i}"]`).forEach(b=>{b.classList.toggle("lit",i===S.active);b.querySelector("b").textContent=readerLabel(i);b.classList.toggle("w",!!LOOK.ord);
+      b.querySelector("small").textContent=r?r.name.split(" ").slice(0,2).join(" "):"";
+      b.setAttribute("aria-label","القارئ "+(i+1)+(r?": "+r.name:""))})});
+  nvFitSoon();
+}
+function nvFit(){nvFit.t=0;if(!nvOn())return;const r=document.createRange();
+  const els=[...$("nv").querySelectorAll("button b,button small")];
+  els.forEach(e=>{e.classList.remove("fit");e.style.removeProperty("--fs")});
+  els.map(e=>{const k=e.parentElement,cs=getComputedStyle(k);if(e.offsetParent===null)return null;
+    const a=k.clientWidth-(parseFloat(cs.paddingLeft)||0)-(parseFloat(cs.paddingRight)||0)-4;r.selectNodeContents(e);return[e,a,r.getBoundingClientRect().width]})
+   .forEach(x=>{if(x&&x[1]>4&&x[2]>x[1]){x[0].classList.add("fit");x[0].style.setProperty("--fs",Math.max(.4,x[1]/x[2]).toFixed(3))}})}
+function nvFitSoon(){if(nvFit.t)return;nvFit.t=requestAnimationFrame(nvFit)}
+/* «عدد التكرار»: each press adds one, from 1 up to the highest count chosen in the settings, then back to 1.
+   1 = each ayah once (no repeat); 2 and more = each ayah that many times, then the next ayah. */
+/* while segments repeat (chosen ayat or «تكرار الآيات») the keys «تكرار» and «العدد» rest, dimmed,
+   until the repetition ends or «إيقاف» is pressed */
+const segOn=()=>!!S.hifz;
+function repTag(){return S.repeat===1?(REPC.ayah?"×"+REPC.ayah:"∞"):""}
+function repName(){return S.repeat===1?"تكرار "+repTag():S.repeat===2?"تكرار السورة":"تكرار"}
+function segBusy(){if(!segOn()||REPSEG)return false;flash("يتكرر مقطع الآن — «تكرار» و«العدد» يعملان بعد انتهائه أو بعد «إيقاف»",2400);return true}
+function nvCntNow(){return S.repeat===1?(REPC.ayah||0):1}
+function nvCount(){const max=NV.cntMax,cur=nvCntNow(),next=cur===0||cur>=max?1:cur+1;
+  if(segBusy())return;
+  if(next===1){if(S.repeat===1)S.repeat=0}
+  else{REPC.ayah=next;store.set("repAyahN",next);S.repeat=1}
+  S.repN=1;flash(next===1?"كل آية مرة واحدة":"تكرار كل آية "+timesTxt(next)+" ثم التالية",1800)}
+function nvListen(){NV.player=true;
+  if(nvPlaying()){render();return}
+  if(S.st==="paused")return resume();
+  if(NV.pickS){const s=NV.pickS;NV.pickS=0;return start(s,1,{announce:true})}
+  if(!S.surah&&M.data&&M.spread){const v=firstVerseOf(M.spread);if(v||v===0){const[s,a]=verseKey(v);return start(s,a,{noBas:a!==1})}}
+  return togglePlay();
+}
+function nvList(open){const L=$("nvList");L.hidden=!open;if(!open)return;
+  const cur=S.surah||NV.pickS||(M.data&&M.spread?verseKey(firstVerseOf(M.spread))[0]:0);
+  $("nvLg").innerHTML=NAMES.map((n,i)=>`<button data-s="${i+1}"${i+1===cur?' class="cur"':""}><b>${i+1}</b><span>${n}</span><small>${AYAT[i]} آية</small></button>`).join("");applySC();
+  $("nvFind").value="";const c=$("nvLg").querySelector(".cur");if(c)c.scrollIntoView({block:"center"});
+}
+var nvNorm=t=>String(t).replace(/[أإآٱ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/[ً-ْ]/g,"").replace(/^ال/,"");
+$("nvFind").addEventListener("input",e=>{const q=nvNorm(e.target.value.trim());
+  $("nvLg").querySelectorAll("button").forEach(b=>{const n=+b.dataset.s;b.hidden=!!q&&!(String(n)===q||nvNorm(NAMES[n-1]).includes(q))})});
+$("nvLg").addEventListener("click",async e=>{const b=e.target.closest("button[data-s]");if(!b)return;const s=+b.dataset.s;nvList(false);
+  if(NV.surahPlay){NV.player=true;NV.pickS=0;return start(s,1,{announce:true})}
+  if(S.surah&&(nvPlaying()||S.st==="paused"))stopAll();
+  NV.pickS=s;try{if(!M.data)await loadMushafData();showSpread(M.data.vp[VSTART[s-1]])}catch(err){}
+  flash("سورة "+NAMES[s-1]+" — اضغط «استماع» لتبدأ",2500)});
+$("nvLx").onclick=()=>nvList(false);
+$("nv").addEventListener("click",e=>{const b=e.target.closest("[data-nv]");if(!b)return;const f=b.dataset.nv;
+  if(f==="list")return nvList(true);
+  if(f==="listen")return nvListen();
+  if(f==="stop")return stopKey();
+  if(f==="rep"){if(nvrlp.fired){nvrlp.fired=false;return}return cycleRep()}
+  if(f==="cnt")return nvCount();
+  if(f==="gap")return cycleGap();
+  if(f==="pause"){if(S.st==="paused")return resume();if(nvPlaying())return pause();return nvListen()}
+  if(f[0]==="r"){if(nvrlp.fired){nvrlp.fired=false;return}return pickReciter(+f[1])}
+  if(f==="dl")return openDl();
+  if(f==="ayat")return SEL.on?selEnd():selStart();
+  if(f==="set")return openSheet();
+});
+/* long press: on «تكرار» repeats the surah, on a reader key opens the settings to choose the reader */
+var nvrlp={t:0,fired:false,x:0,y:0};
+$("nv").addEventListener("pointerdown",e=>{const b=e.target.closest('[data-nv="rep"],[data-nv^="r"]');if(!b||e.button>0)return;clearTimeout(nvrlp.t);
+  const f=b.dataset.nv;nvrlp={fired:false,x:e.clientX,y:e.clientY,t:setTimeout(()=>{nvrlp.fired=true;f==="rep"?repSurah():openSheet(+f[1])},longMs())}});
+$("nv").addEventListener("pointermove",e=>{if(Math.abs(e.clientX-nvrlp.x)+Math.abs(e.clientY-nvrlp.y)>slop())clearTimeout(nvrlp.t)});
+["pointerup","pointercancel","pointerleave"].forEach(t=>$("nv").addEventListener(t,()=>clearTimeout(nvrlp.t)));
+$("nv").addEventListener("contextmenu",e=>e.preventDefault());
+/* settings of the views */
+$("nvCntMaxSel").innerHTML=[2,3,4,5,6,7,8,9,10,12,15,20].map(n=>`<option value="${n}">${n}</option>`).join("");
+$("nvCntMaxSel").value=String(NV.cntMax);$("nvCntMaxSel").addEventListener("change",e=>{NV.cntMax=+e.target.value;store.set("nvCntMax",NV.cntMax);render()});
+$("viewSel").value=NV.mode;$("viewSel").addEventListener("change",e=>setViewMode(e.target.value));
+$("nvPagesSel").value=NV.pages;$("nvPagesSel").addEventListener("change",e=>{NV.pages=e.target.value;store.set("nvPages",NV.pages);
+  if(nvOn()){M.view=store.get(PORTRAIT?"mview_p":"mview",PORTRAIT?1:2);nvPagesFix();if(M.open&&M.data)showSpread(M.spread)}});
+[["nvStatusOn","status","nvStatus"],["nvLabelsOn","labels","nvLabels"],["nvBigOn","big","nvBig"],["nvSurahPlayOn","surahPlay","nvSurahPlay"]].forEach(([id,k,key])=>{
+  $(id).checked=NV[k];$(id).addEventListener("change",e=>{NV[k]=e.target.checked;store.set(key,NV[k]);nvApply();
+    if(nvOn()&&M.open&&M.data&&k!=="surahPlay")setTimeout(()=>showSpread(M.spread),60)})});
+/* back key: close the surah list first */
+{const hb=window.handleBack;window.handleBack=()=>{if(!$("nvList").hidden){nvList(false);return 1}return hb?hb():0}}
+/* the mushaf keeps its size when the window changes (rotation, the browser bar) */
+addEventListener("resize",()=>{if(nvOn())nvFitSoon();if(!nvOn()||!M.open||!M.data)return;clearTimeout(nvApply.t);nvApply.t=setTimeout(()=>showSpread(M.spread),200)});
+enterView(true);
+/* settings of turning the pages */
+function ptSync(){$("ptSel").value=PT.mode;$("ptSpeed").value=PT.speed;$("ptAuto").checked=PT.auto;
+  $("ptSpeedRow").hidden=$("ptAutoRow").hidden=PT.mode!=="slide"}
+ptSync();
+$("ptSel").addEventListener("change",e=>{PT.mode=e.target.value==="none"?"none":"slide";store.set("pturn",PT.mode);flipReset();ptSync()});
+$("ptSpeed").addEventListener("change",e=>{PT.speed=e.target.value;store.set("pturnSpeed",PT.speed)});
+$("ptAuto").addEventListener("change",e=>{PT.auto=e.target.checked;store.set("pturnAuto",PT.auto)});
 /* ===== input ===== */
 let lpTimer,lpFired=false;
-panel.addEventListener("pointerdown",e=>{const r=e.target.closest("[data-r]");if(!r)return;lpFired=false;lpTimer=setTimeout(()=>{lpFired=true;openSheet(+r.dataset.r)},650)});
+panel.addEventListener("pointerdown",e=>{const r=e.target.closest("[data-r]");if(!r)return;lpFired=false;lpTimer=setTimeout(()=>{lpFired=true;openSheet(+r.dataset.r)},longMs())});
 ["pointerup","pointerleave","pointercancel"].forEach(t=>panel.addEventListener(t,()=>clearTimeout(lpTimer)));
 panel.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
@@ -1973,9 +2666,11 @@ panel.addEventListener("click",e=>{
   if(b.dataset.r!=null){if(lpFired){lpFired=false;return}return pickReciter(+b.dataset.r)}
   switch(b.dataset.f){
     case"play":return togglePlay();
-    case"stop":return stopAll();
+    case"stop":return stopKey();
     case"hifz":return hifzKey();
     case"rep":return cycleRep();
+    case"cnt":return nvCount();
+    case"gap":return cycleGap();
     case"prev":return stepAyah(-1);
     case"next":return stepAyah(1);
     case"prevS":return stepSurah(-1);
@@ -1986,17 +2681,81 @@ panel.addEventListener("click",e=>{
   }
 });
 panel.addEventListener("contextmenu",e=>e.preventDefault());
+/* long press on «تكرار» (board key or side rail): repeat the whole surah */
+/* ===== a long press on any key shows what it does (1.82) =====
+   from 0.45 s a tip appears for a few seconds; letting go then does nothing.
+   Keys with a second job (تكرار، القراء، المصحف) still do it after a full second. */
+var TIP={on:store.get("tipsOn",true),d:store.get("tipDelay",700),t:0,h:0,shown:false,x:0,y:0,t0:0};
+const tipMs=()=>TOUCH.easy?Math.max(TIP.d,1200):TIP.d;
+const TIP_SEL="#device button,#nv button,#selBar button";
+const LONG_ACT_SEL='#f_rep,[data-sf="rep"],[data-nv="rep"],[data-nv^="r"],#panel [data-r],.key.mus,#mBtn';
+function tipText(b){const d=b.dataset,f=d.f||d.sf||d.nv||"",mx=(typeof NV!=="undefined"&&NV.cntMax)||5;
+  const now=()=>S.repeat===1?(REPC.ayah?"كل آية "+timesTxt(REPC.ayah):"الآية بلا توقف"):S.repeat===2?"تكرار السورة":"بدون تكرار";
+  const rd=i=>{const r=RECITERS.find(x=>x.id===S.slots[i])||{};return `<b>القارئ ${i+1}</b>: ${r.short||r.name||""}<br>ضغطة: التلاوة بصوته. ضغط مطوّل (ثانية): اختيار قارئ آخر.`};
+  if(b.closest("#selReps"))return "<b>عدد مرات تكرار الآيات المحددة</b>";
+  if(/^r\d$/.test(f))return rd(+f[1]);if(d.r!=null)return rd(+d.r);
+  const T={prev:"<b>الآية السابقة</b>",next:"<b>الآية التالية</b>",prevS:"<b>السورة السابقة</b>",nextS:"<b>السورة التالية</b>",
+    play:"<b>تشغيل / إيقاف مؤقت</b><br>الإيقاف المؤقت يُكمل من الموضع نفسه.",pause:"<b>إيقاف مؤقت / استمرار</b>",
+    stop:"<b>إيقاف</b><br>يوقف الصوت ويلغي كل تكرار.",volDn:"<b>خفض الصوت</b>",volUp:"<b>رفع الصوت</b>",
+    rep:`<b>تكرار الآية</b><br>${REPMODE==="toggle"?"ضغطة: تشغيل تكرار الآية أو إيقافه.":`كل ضغطة: بلا توقف ← ×2 ← ×3 … ← ×${mx} ← بدون.`}<br>ضغط مطوّل (ثانية): تكرار السورة.<br>الآن: ${now()}`,
+    cnt:`<b>العدد</b><br>كم مرة تُقرأ كل آية: ×1 ← ×2 … ← ×${mx}.<br>الآن: ${now()}`,
+    gap:`<b>السكوت بعد كل آية</b><br>وقت لترديد الآية بعد القارئ. كل ضغطة: ¼ ← ½ ← ¾ ← مثل الآية ← بدون.<br>الآن: ${GAP_NAME[S.gap]||""}`,
+    range:"<b>من آية إلى آية</b><br>اختر آيات بالأرقام وعدد مرات تكرارها.",hifz:"<b>تكرار الآيات للحفظ</b><br>تُقسَّم السورة مقاطع، وكل مقطع يتكرر.",
+    pgNext:"<b>الصفحة التالية</b>",pgPrev:"<b>الصفحة السابقة</b>",list:"<b>قائمة السور</b> مع البحث بالاسم أو الرقم.",
+    listen:"<b>استماع</b><br>يبدأ من السورة المختارة أو من أول آية في الصفحة الظاهرة.",
+    ayat:"<b>تحديد آيات من المصحف</b><br>اضغط آية البداية ثم آية النهاية واختر عدد المرات.",dl:"<b>تنزيل التلاوات</b> للاستماع بلا إنترنت.",set:"<b>الإعدادات</b>"};
+  if(T[f])return T[f];
+  if(d.s)return `<b>سورة ${NAMES[d.s-1]}</b> (${AYAT[d.s-1]} آية)<br>ضغطة: الاستماع إليها.`;
+  if(d.dua)return "<b>أدعية مختارة</b> من القرآن الكريم.";
+  if(b.matches(".key.mus,#mBtn"))return "<b>المصحف</b>: عرضه أو إخفاؤه.<br>ضغط مطوّل (ثانية): تبديل الطبعة.";
+  if(b.matches(".key.hzc"))return `<b>${d.k} ${+d.k===1?"آية":+d.k===2?"آيتان":"آيات"}</b><br>تتكرر معًا للحفظ.`;
+  const id=b.id;
+  if(id==="selX")return "<b>إلغاء</b>: يغلق الشريط ويوقف تكرار الآيات المحددة.";
+  if(id==="selNum")return "<b>بالأرقام</b>: تعديل الآيات المحددة من قائمة الأرقام.";
+  if(id==="selGo")return "<b>كرّر / تم</b>: يبدأ تكرار الآيات المحددة، أو يغلق الشريط ويبقى التكرار.";
+  if(id==="gear")return "<b>الإعدادات</b> واختيار القراء.";if(id==="dlBtn")return "<b>تنزيل التلاوات</b> للاستماع بلا إنترنت.";
+  const l=b.getAttribute("aria-label");return l?`<b>${l}</b>`:""}
+function hideTip(){clearTimeout(TIP.h);$("tip").hidden=true}
+function showTip(b){const t=tipText(b);if(!t)return false;const d=$("tip");d.innerHTML=t;d.hidden=false;
+  const r=b.getBoundingClientRect(),w=d.offsetWidth,h=d.offsetHeight;
+  d.style.left=Math.max(6,Math.min(innerWidth-w-6,r.left+r.width/2-w/2))+"px";
+  d.style.top=(r.top-h-8>6?r.top-h-8:Math.min(innerHeight-h-6,r.bottom+8))+"px";
+  clearTimeout(TIP.h);TIP.h=setTimeout(hideTip,3500);return true}
+document.addEventListener("pointerdown",e=>{hideTip();clearTimeout(TIP.t);TIP.shown=false;if(!TIP.on||e.button>0)return;
+  const b=e.target.closest(TIP_SEL);if(!b||b.hidden)return;TIP.x=e.clientX;TIP.y=e.clientY;TIP.t0=Date.now();
+  TIP.t=setTimeout(()=>{TIP.t=0;TIP.shown=showTip(b);if(TIP.shown&&!NA())try{navigator.vibrate&&wasActive()&&navigator.vibrate(10)}catch(x){}},tipMs())},true);
+document.addEventListener("pointermove",e=>{if(TIP.t&&Math.abs(e.clientX-TIP.x)+Math.abs(e.clientY-TIP.y)>slop()){clearTimeout(TIP.t);TIP.t=0}},true);
+["pointerup","pointercancel"].forEach(t=>document.addEventListener(t,()=>{clearTimeout(TIP.t);TIP.t=0},true));
+document.addEventListener("contextmenu",e=>{if(e.target.closest(TIP_SEL))e.preventDefault()},true);
+document.addEventListener("click",e=>{if(!TIP.shown)return;const b=e.target.closest(TIP_SEL);TIP.shown=false;if(!b)return;
+  if(b.matches(LONG_ACT_SEL)&&Date.now()-TIP.t0>=longMs())return;   /* its own long action took this press */
+  e.stopPropagation();e.preventDefault()},true);
+$("tipDelaySel").value=String(TIP.d);$("tipDelaySel").addEventListener("change",e=>{TIP.d=+e.target.value||700;store.set("tipDelay",TIP.d)});
+$("touchEasy").checked=TOUCH.easy;$("touchEasy").addEventListener("change",e=>{TOUCH.easy=e.target.checked;store.set("touchEasy",TOUCH.easy);
+  flash(TOUCH.easy?"لمس سهل: المفتاح يعمل بلمسة خفيفة":"عاد اللمس العادي",2000)});
+$("tipsOn").checked=TIP.on;$("tipsOn").addEventListener("change",e=>{TIP.on=e.target.checked;store.set("tipsOn",TIP.on)});
+$("repModeSel").value=REPMODE;$("repModeSel").addEventListener("change",e=>{REPMODE=e.target.value;store.set("repMode",REPMODE);render()});
+$("repOld").onclick=()=>{REPMODE="toggle";REPSEG=false;TIP.on=false;store.set("repMode",REPMODE);store.set("repInSeg",false);store.set("tipsOn",false);
+  $("repModeSel").value=REPMODE;$("repInSeg").checked=false;$("tipsOn").checked=false;render();flash("رجع الوضع القديم — يمكنك تغيير كل خيار من هنا",2600)};
+$("repInSeg").checked=REPSEG;$("repInSeg").addEventListener("change",e=>{REPSEG=e.target.checked;store.set("repInSeg",REPSEG);render()});
+const REP_SEL='#f_rep,[data-sf="rep"]';let rlp={t:0,fired:false,x:0,y:0};
+document.addEventListener("pointerdown",e=>{const b=e.target.closest(REP_SEL);if(!b||e.button>0)return;clearTimeout(rlp.t);
+  rlp={fired:false,x:e.clientX,y:e.clientY,t:setTimeout(()=>{rlp.fired=true;repSurah()},longMs())}},true);
+document.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-rlp.x)+Math.abs(e.clientY-rlp.y)>slop())clearTimeout(rlp.t)},true);
+["pointerup","pointercancel"].forEach(t=>document.addEventListener(t,()=>{clearTimeout(rlp.t);if(rlp.fired)setTimeout(()=>{rlp.fired=false},350)},true));
+document.addEventListener("click",e=>{if(rlp.fired&&e.target.closest(REP_SEL)){rlp.fired=false;e.stopPropagation();e.preventDefault()}},true);
 /* long press on «المصحف» (the key on the board, or the margin button while the mushaf is open): switch between the two mushafs */
 const MUS_SEL=".key.mus,#mBtn";let mlp={t:0,fired:false,x:0,y:0};
 document.addEventListener("pointerdown",e=>{const b=e.target.closest(MUS_SEL);if(!b||e.button>0)return;clearTimeout(mlp.t);
-  mlp={fired:false,x:e.clientX,y:e.clientY,t:setTimeout(()=>{mlp.fired=true;toggleEdition()},650)}},true);
-document.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-mlp.x)+Math.abs(e.clientY-mlp.y)>14)clearTimeout(mlp.t)},true);
+  mlp={fired:false,x:e.clientX,y:e.clientY,t:setTimeout(()=>{mlp.fired=true;toggleEdition()},longMs())}},true);
+document.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-mlp.x)+Math.abs(e.clientY-mlp.y)>slop())clearTimeout(mlp.t)},true);
 ["pointerup","pointercancel"].forEach(t=>document.addEventListener(t,()=>{clearTimeout(mlp.t);if(mlp.fired)setTimeout(()=>{mlp.fired=false},350)},true));
 document.addEventListener("click",e=>{if(mlp.fired&&e.target.closest(MUS_SEL)){mlp.fired=false;e.stopPropagation();e.preventDefault()}},true);
 $("rail").addEventListener("contextmenu",e=>e.preventDefault());
-function toggleEdition(){const ed=M.ed===1?2:1;setEdition(ed);$("medSel").value=String(ed);
+const ED_NAME={2:"مصحف المدينة — طبعة 1423",4:"مصحف المدينة — طبعة 1423 بألوان التجويد (V4)",1:"مصحف المدينة — طبعة 1405 (الأوضح)"};
+function toggleEdition(){const ed={2:4,4:1,1:2}[M.ed]||2;setEdition(ed);$("medSel").value=String(ed);
   try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}
-  flash(ed===1?"مصحف المدينة — طبعة 1405 (الأوضح)":"مصحف المدينة — طبعة 1421",2500);
+  flash(ED_NAME[ed],2500);
   if(!M.open)openMushaf(true)}
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"){window.handleBack();return}
